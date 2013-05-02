@@ -84,7 +84,25 @@ exports.default = function (srcRoot, destRoot, options) {
 
 exports.compiler = function (srcRoot, destRoot, options) {
 
+    var middleware = noop;
 
+    Object.keys(options).forEach(function (name) {
+        var impl = exports[name](srcRoot, destRoot, options[name]);
+
+        middleware = (function (prev) {
+            return function (req, res, next) {
+                impl(req, res, function (err) {
+                    if (err) {
+                        next(err);
+                        return;
+                    }
+                    prev(req, res, next);
+                });
+            }
+        }(middleware));
+    });
+
+    return middleware;
 
 };
 
