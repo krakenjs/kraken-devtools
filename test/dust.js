@@ -6,20 +6,10 @@ var path = require('path'),
     devtools = require('../index');
 
 
-exports.paths = {
-    valid: '/templates/index.js',
-    invalid: '/templates/invalid.js',
-    nested: '/templates/inc/partial.js',
-    nonexistent: '/templates/unknown.js',
-    unrecognized: '/templates/invalid.dust',
-    similar: '/templates/similar',
-    unknown: '/tmpl/whatthewhat'
-};
-
 
 describe('dust compiler', function () {
 
-    var srcRoot, staticRoot, paths = exports.paths;
+    var srcRoot, staticRoot, paths = require('./config.json').dust;
 
 
     function resetEnv(next) {

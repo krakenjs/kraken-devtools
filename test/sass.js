@@ -5,21 +5,9 @@ var path = require('path'),
     fsutils = require('fsutils'),
     devtools = require('../index');
 
-
-exports.paths = {
-    valid: '/css/sass/app.css',
-    invalid: '/css/sass/invalid.css',
-    nested: '/css/sass/inc/colors.css',
-    nonexistent: '/css/sass/unknown.css',
-    unrecognized: '/css/sass/invalid.sass',
-    similar: '/css/sass/similar',
-    unknown: '/tmpl/whatthewhat'
-};
-
-
 describe('sass compiler', function () {
 
-    var srcRoot, staticRoot, paths = exports.paths;
+    var srcRoot, staticRoot, paths = require('./config.json').sass;
 
     function resetEnv(next) {
         fsutils.rmdirf(staticRoot, next);

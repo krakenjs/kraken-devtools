@@ -6,20 +6,9 @@ var path = require('path'),
     devtools = require('../index');
 
 
-exports.paths = {
-    valid: '/css/less/app.css',
-    invalid: '/css/less/invalid.css',
-    nested: '/css/less/inc/colors.css',
-    nonexistent: '/css/less/unknown.css',
-    unrecognized: '/css/less/invalid.sass',
-    similar: '/css/less/similar',
-    unknown: '/tmpl/whatthewhat'
-}
-
-
 describe('less compiler', function () {
 
-    var srcRoot, staticRoot, paths = exports.paths;
+    var srcRoot, staticRoot, paths = require('./config.json').less;
 
     function resetEnv(next) {
         fsutils.rmdirf(staticRoot, next);
