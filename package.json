@@ -1,6 +1,6 @@
 {
   "name": "webcore-devtools",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A development mode toolkit for webcore",
   "main": "index.js",
   "scripts": {
@@ -12,10 +12,6 @@
     "javascript",
     "webcore"
   ],
-  "peerDependencies": {
-    "express-dustjs": "~0.0.0",
-    "less": "*"
-  },
   "devDependencies": {
     "express": "~3.2.0",
     "less": "*",

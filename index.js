@@ -86,7 +86,7 @@ exports.compiler = function (srcRoot, destRoot, options) {
 
     var middleware = noop;
 
-    Object.keys(options).forEach(function (name) {
+    Object.keys(options || {}).forEach(function (name) {
         var impl = exports[name](srcRoot, destRoot, options[name]);
 
         middleware = (function (prev) {
