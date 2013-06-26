@@ -32,7 +32,8 @@ exports.less = function (srcRoot, destRoot, options) {
     compiler = function less(name, data, args, callback) {
         var parser = new(lib.Parser)({
             paths: args.paths, // Specify search paths for @import directives
-            filename: name // Specify a filename, for better error messages
+            filename: name, // Specify a filename, for better error messages
+            dumpLineNumbers: "comments" // Enables comment style debugging
         });
 
         try {
