@@ -1,6 +1,6 @@
 {
   "name": "webcore-devtools",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A development mode toolkit for webcore",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,9 @@
     "fsutils": "git://github.paypal.com/CoreUIE/node-fsutils.git"
   },
   "author": "Erik Toth <ertoth@paypal.com>",
+  "contributors": [
+    "Jean-Charles Sisk <jeancharles@paypal.com>"
+  ],
   "license": "BSD",
   "dependencies": {
     "async": "~0.2.7",
