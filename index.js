@@ -62,7 +62,12 @@ exports.sass = function (srcRoot, destRoot, options) {
 
     lib = requireAny('node-sass');
     compiler = function scss(name, data, args, callback) {
-        lib.render(data, callback, { includePaths: args.paths });
+        lib.render({
+            data: data,
+            success: callback.bind(this, null),
+            error: callback,
+            includePaths: args.paths
+        });
     };
 
     return middleware(srcRoot, destRoot, options, compiler, 'css');
