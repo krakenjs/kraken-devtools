@@ -104,7 +104,7 @@ exports.compiler = function (srcRoot, destRoot, options) {
                     }
                     prev(req, res, next);
                 });
-            }
+            };
         }(middleware));
     });
 
@@ -178,7 +178,7 @@ function filterRequest(regex, fn) {
         }
 
         fn.apply(undefined, arguments);
-    }
+    };
 }
 
 
@@ -210,7 +210,7 @@ function requireAny(/*modules*/) {
 function createPathRegex(dir, ext) {
     dir = dir || '';
     if (dir.charAt(0) !== '/') {
-        dir = '/' + dir
+        dir = '/' + dir;
     }
 
     if (dir.charAt(dir.length - 1) !== '/') {
