@@ -10,7 +10,7 @@
     "prototypejs": false,
     "mootools": false,
     "dojo": false,
-    "predef": ["__devenv", "resourceRoot", "describe", "it"],
+    "predef": [],
     "debug": false,
     "devel": false,
     "es5": true,
