@@ -96,7 +96,7 @@ exports.compiler = function (srcRoot, destRoot, options) {
         var impl = exports[name](srcRoot, destRoot, options[name]);
 
         middleware = (function (prev) {
-            return function (req, res, next) {
+            return function webcoreCompiler(req, res, next) {
                 impl(req, res, function (err) {
                     if (err) {
                         next(err);
@@ -166,7 +166,7 @@ function middleware(srcRoot, destRoot, options, compiler, ext) {
 
 
 function filterRequest(regex, fn) {
-    return function (req, res, next) {
+    return function filterRequest(req, res, next) {
         if (req.method.toLowerCase() !== 'get') {
             next();
             return;
