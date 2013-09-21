@@ -187,4 +187,15 @@ exports._handleRequests = function (paths) {
         });
     });
 
+
+    itIf(paths.missing, 'should error on missing includes', function (next) {
+        req.path = paths.missing;
+
+        this.middleware(req, res, function (err) {
+            console.dir(err);
+            assert.ok(err);
+            notExists(path.join(paths.staticRoot, req.path), next);
+        });
+    });
+
 };

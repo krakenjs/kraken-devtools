@@ -15,7 +15,8 @@
        "nonexistent": "/css/less/unknown.css",
        "unrecognized": "/css/less/invalid.sass",
        "similar": "/css/less/similar",
-       "unknown": "/tmpl/whatthewhat"
+       "unknown": "/tmpl/whatthewhat",
+       "missing": "/css/less/missing.css"
     },
     "sass": {
        "valid": "/css/sass/app.css",

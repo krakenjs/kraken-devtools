@@ -1,6 +1,6 @@
 {
   "name": "webcore-devtools",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A development mode toolkit for webcore",
   "main": "index.js",
   "scripts": {
@@ -13,12 +13,12 @@
     "webcore"
   ],
   "devDependencies": {
-    "express": "~3.2.0",
+    "express": "~3.4.0",
     "less": "*",
     "mocha": "~1.9.0",
     "chai": "~1.5.0",
     "node-sass": "~0.6.3",
-    "dustjs-linkedin": "~1.2.4",
+    "dustjs-linkedin": "~2.0.1",
     "fsutils": "git://github.paypal.com/CoreUIE/node-fsutils.git"
   },
   "author": "Erik Toth <ertoth@paypal.com>",
