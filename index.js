@@ -146,7 +146,6 @@ function middleware(srcRoot, destRoot, options, compiler, ext) {
         };
 
         async.waterfall([start].concat(tasks), function (err) {
-            var alt;
             // Guard against modules throwing whatever they damn well please.
 
             if (typeof err === 'string') {
