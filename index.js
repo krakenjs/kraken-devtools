@@ -146,6 +146,7 @@ function middleware(srcRoot, destRoot, options, compiler, ext) {
         };
 
         async.waterfall([start].concat(tasks), function (err) {
+            var alt;
             // Guard against modules throwing whatever they damn well please.
 
             if (typeof err === 'string') {
@@ -155,13 +156,10 @@ function middleware(srcRoot, destRoot, options, compiler, ext) {
             // On Ubuntu, `less` failures return an object that is not an error but has the structure
             // { type: '', message: '', index: '' } so we need to accommodate that. :/
             if (typeof err === 'object' && err !== null && !(err instanceof Error)) {
-                err = Object.create(Error.prototype, Object.keys(err).reduce(function (props, key) {
-                    props[key] = {
-                        value: err[key],
-                        enumerable: true
-                    };
-                    return props;
-                }, {}));
+                err = Object.keys(err).reduce(function (dest, prop) {
+                    dest[prop] = err[prop];
+                    return dest;
+                }, new Error());
             }
 
             // Missing source is a valid case. Not an error.
