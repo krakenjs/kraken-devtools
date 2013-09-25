@@ -192,7 +192,6 @@ exports._handleRequests = function (paths) {
         req.path = paths.missing;
 
         this.middleware(req, res, function (err) {
-            console.dir(err);
             assert.ok(err);
             notExists(path.join(paths.staticRoot, req.path), next);
         });
