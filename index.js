@@ -28,7 +28,7 @@ var fs = require('fs'),
 exports.dust = function (srcRoot, destRoot, options) {
     var lib, compiler;
 
-    lib = requireAny('dustjs-linkedin', 'express-dustjs');
+    lib = requireAny('dustjs-linkedin', 'adaro');
     compiler = function dust(name, data, args, callback) {
         try {
             callback(null, lib.compile(data.toString('utf8'), name));
