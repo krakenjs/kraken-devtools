@@ -113,7 +113,7 @@ exports.compiler = function (srcRoot, destRoot, options) {
         var impl = exports[name](srcRoot, destRoot, options[name]);
 
         middleware = (function (prev) {
-            return function webcoreCompiler(req, res, next) {
+            return function krakenCompiler(req, res, next) {
                 impl(req, res, function (err) {
                     if (err) {
                         next(err);
