@@ -3,7 +3,7 @@
 
 var fs = require('fs'),
     path = require('path'),
-    fsutils = require('fsutils'),
+    rimraf = require('rimraf'),
     assert = require('chai').assert;
 
 
@@ -11,7 +11,7 @@ exports.handleRequests = function (dir, paths, factory) {
 
 
     beforeEach(function (next) {
-        fsutils.rmdirf(paths.staticRoot, next);
+        rimraf(paths.staticRoot, next);
     });
 
 

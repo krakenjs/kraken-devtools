@@ -2,7 +2,7 @@
 'use strict';
 
 var path = require('path'),
-    fsutils = require('fsutils'),
+    rimraf = require('rimraf'),
     devtools = require('../index');
 
 describe('sass compiler', function () {
@@ -10,7 +10,7 @@ describe('sass compiler', function () {
     var srcRoot, staticRoot, paths = require('./config.json').sass;
 
     function resetEnv(next) {
-        fsutils.rmdirf(staticRoot, next);
+        rimraf(staticRoot, next);
     }
 
 

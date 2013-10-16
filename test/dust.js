@@ -2,7 +2,7 @@
 'use strict';
 
 var path = require('path'),
-    fsutils = require('fsutils'),
+    rimraf = require('rimraf'),
     devtools = require('../index');
 
 
@@ -13,7 +13,7 @@ describe('dust compiler', function () {
 
 
     function resetEnv(next) {
-        fsutils.rmdirf(staticRoot, next);
+        rimraf(staticRoot, next);
     }
 
 
