@@ -25,7 +25,7 @@
     "chai": "~1.5.0",
     "node-sass": "~0.6.3",
     "dustjs-linkedin": "~2.0.1",
-    "fsutils": "git://github.paypal.com/CoreUIE/node-fsutils.git"
+    "rimraf": "~2.2.2"
   },
   "author": "Erik Toth <ertoth@paypal.com>",
   "contributors": [

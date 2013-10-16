@@ -2,7 +2,7 @@
 'use strict';
 
 var path = require('path'),
-    fsutils = require('fsutils'),
+    rimraf = require('rimraf'),
     devtools = require('../index');
 
 var hooks = require('./hooks');
@@ -19,7 +19,7 @@ describe('default copier', function () {
 
 
     function resetEnv(next) {
-        fsutils.rmdirf(staticRoot, next);
+        rimraf(staticRoot, next);
     }
 
 

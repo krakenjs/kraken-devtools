@@ -2,7 +2,7 @@
 'use strict';
 
 var path = require('path'),
-    fsutils = require('fsutils'),
+    rimraf = require('rimraf'),
     devtools = require('../index');
 
 
@@ -11,7 +11,7 @@ describe('less compiler', function () {
     var srcRoot, staticRoot, paths = require('./config.json').less;
 
     function resetEnv(next) {
-        fsutils.rmdirf(staticRoot, next);
+        rimraf(staticRoot, next);
     }
 
 
