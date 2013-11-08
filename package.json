@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.paypal.com/webcore/webcore-devtools.git"
+    "url": "https://github.paypal.com/webcore/kraken-devtools.git"
   },
   "publishConfig": {
     "registry": "http://npm.paypal.com"
