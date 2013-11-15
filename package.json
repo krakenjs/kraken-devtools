@@ -10,6 +10,9 @@
     "type": "git",
     "url": "https://github.com/paypal/kraken-devtools.git"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "keywords": [
     "node",
     "javascript",
