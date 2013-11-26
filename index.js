@@ -112,6 +112,11 @@ exports.compiler = function (srcRoot, destRoot, options) {
     var middleware = noop;
 
     Object.keys(options || {}).forEach(function (name) {
+        // Skip if explicitly set to false
+        if (options[name] === false) {
+            return;
+        }
+
         var impl = exports[name](srcRoot, destRoot, options[name]);
 
         middleware = (function (prev) {
