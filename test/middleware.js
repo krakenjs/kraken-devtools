@@ -122,6 +122,15 @@ exports._handleRequests = function (paths) {
         });
     });
 
+    itIf(paths.numbered, 'should handle a numbered file extension without error', function (next) {
+        req.path = paths.numbered;
+
+        this.middleware(req, res, function (err) {
+            assert.ok(!err);
+            exists(path.join(paths.staticRoot, req.path), next);
+        });
+    });
+
 
     itIf(paths.nested, 'should handle a template in a nested directory', function (next) {
         req.path = paths.nested;
