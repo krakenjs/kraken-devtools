@@ -9,7 +9,11 @@ var path = require('path'),
 
 describe('dust compiler', function () {
 
-    var srcRoot, staticRoot, paths = require('./config.json').dust;
+    var srcRoot,
+        staticRoot,
+        paths = {
+            'localized': '/templates/US/es/localized.js'
+        };
 
 
     function resetEnv(next) {
@@ -18,7 +22,10 @@ describe('dust compiler', function () {
 
 
     function factory(config) {
-        return devtools.dust(srcRoot, staticRoot, config);
+        return devtools.dust(srcRoot, staticRoot, config, {
+            "fallback": "en-US",
+            "contentPath": path.join(process.cwd(), 'fixtures', 'locales')
+        });
     }
 
 
@@ -35,6 +42,6 @@ describe('dust compiler', function () {
 
     require('./middleware').handleRequests('templates', paths, factory);
 
-    require('./hooks').executeHooks('templates', '/templates/index.js', factory);
+    require('./i18n-hooks').executeHooks('templates', '/templates/US/es/localized.js', factory);
 
 });

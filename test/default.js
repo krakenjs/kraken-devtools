@@ -3,7 +3,7 @@
 
 var path = require('path'),
     rimraf = require('rimraf'),
-    devtools = require('../index');
+    devtools = require('../lib/plugins');
 
 var hooks = require('./hooks');
 
