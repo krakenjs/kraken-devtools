@@ -22,10 +22,7 @@ describe('dust compiler', function () {
 
 
     function factory(config) {
-        return devtools.dust(srcRoot, staticRoot, config, {
-            "fallback": "en-US",
-            "contentPath": path.join(process.cwd(), 'fixtures', 'locales')
-        });
+        return devtools.dust(srcRoot, staticRoot, config);
     }
 
 
@@ -42,6 +39,11 @@ describe('dust compiler', function () {
 
     require('./middleware').handleRequests('templates', paths, factory);
 
-    require('./i18n-hooks').executeHooks('templates', '/templates/US/es/localized.js', factory);
-
+    require('./i18n-hooks').executeHooks({
+            dir: 'templates',
+            i18n: {
+                'fallback': 'en-US',
+                'contentPath' : path.join(process.cwd(), 'test', 'fixtures', 'locales')
+            }
+        }, '/templates/US/es/localized.js', factory);
 });
