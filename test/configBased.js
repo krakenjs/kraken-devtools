@@ -12,7 +12,7 @@ describe('config-based compiler', function () {
 
     var srcRoot, staticRoot, paths, config;
 
-    paths = require('./config.json');
+    paths = require('./fixtures/config.json');
 
     config = {
         dust: {

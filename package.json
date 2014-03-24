@@ -43,7 +43,6 @@
     "node-sass": "^0.6.3",
     "dustjs-linkedin": "^2.0.1",
     "localizr": "git://github.com/totherik/localizr.git",
-    "rimraf": "^2.2.2",
     "grunt": "^0.4.1",
     "grunt-contrib-jshint": "^0.7.0",
     "grunt-mocha-test": "^0.7.0"
