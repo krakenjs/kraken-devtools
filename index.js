@@ -23,38 +23,39 @@ var noop = require('./lib/noop'),
 
 
 
+
 module.exports = function (src, dest, config) {
 
-	return function (req, res, next) {
-		var chain, handler, compiler, name, options;
+    return function (req, res, next) {
+        var chain = noop;
 
-        chain = noop;
+        Object.keys(config || {}).forEach(function (name) {
+            var options, compiler, handler;
 
-		for (name in config) {
             options = config[name];
 
-		    // Skip if explicitly set to false
-		    if (options === false) {
-		        return;
-		    }
+            // Skip if explicitly set to false
+            if (options === false) {
+                return;
+            }
 
             compiler = require(options.module)(options);
             handler = middleware(src, dest, options, compiler);
 
-		    // Create a middleware chain of each handler
-		    chain = (function (prev) {
-		        return function devCompiler(req, res, next) {
-		            handler(req, res, function (err) {
-		                if (err) {
-		                    next(err);
-		                    return;
-		                }
-		                prev(req, res, next);
-		            });
-		        };
-		    }(chain));
-		}
+            // Create a middleware chain of each handler
+            chain = (function (prev) {
+                return function devCompiler(req, res, next) {
+                    handler(req, res, function (err) {
+                        if (err) {
+                            next(err);
+                            return;
+                        }
+                        prev(req, res, next);
+                    });
+                };
+            }(chain));
+        });
 
-		chain(req, res, next);
-	};
+        chain(req, res, next);
+    };
 };
