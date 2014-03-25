@@ -44,7 +44,10 @@ describe('devtools', function () {
 
     it('returns a middleware chain using a non-empty config', function (done) {
         var app = testutil.createApp({
-            less: 'css'
+            less: {
+                module: require('../lib/plugins/less'),
+                files: '/css/**/*.css'
+            }
         });
 
         request(app)

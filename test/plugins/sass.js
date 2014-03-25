@@ -34,7 +34,10 @@ describe('plugins:sass', function () {
 
     it('compiles sass to css', function (done) {
         var app = testutil.createApp({
-            sass: 'css'
+            sass: {
+                module: require('../../lib/plugins/sass'),
+                files: '/css/**/*.css'
+            }
         });
 
         request(app)
@@ -46,7 +49,10 @@ describe('plugins:sass', function () {
 
     it('Errors on invalid inputs', function (done) {
         var app = testutil.createApp({
-            sass: 'css'
+            sass: {
+                module: require('../../lib/plugins/sass'),
+                files: '/css/**/*.css'
+            }
         });
 
         request(app)
@@ -58,7 +64,10 @@ describe('plugins:sass', function () {
 
     it('Errors on missing includes', function (done) {
         var app = testutil.createApp({
-            sass: 'css'
+            sass: {
+                module: require('../../lib/plugins/sass'),
+                files: '/css/**/*.css'
+            }
         });
 
         request(app)

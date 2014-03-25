@@ -34,11 +34,33 @@ describe('plugins:dust', function () {
 
     it('compiles dust to js', function (done) {
         var app = testutil.createApp({
-            dust: 'templates'
+            dust: {
+                module: require('../../lib/plugins/dust'),
+                files: '**/*.js',
+                base: '/templates'
+            }
         });
 
         request(app)
             .get('/templates/index.js')
+            .expect(/dust.register\("index"/)
+            .expect(200)
+            .end(done);
+    });
+
+
+    it('compiles nested dust to js', function (done) {
+        var app = testutil.createApp({
+            dust: {
+                module: require('../../lib/plugins/dust'),
+                files: '**/*.js',
+                base: '/templates'
+            }
+        });
+
+        request(app)
+            .get('/templates/inc/partial.js')
+            .expect(/dust.register\("inc\/partial"/)
             .expect(200)
             .end(done);
     });
@@ -47,7 +69,9 @@ describe('plugins:dust', function () {
     it('compiles localized dust to js', function (done) {
         var app = testutil.createApp({
             dust: {
-                dir: 'templates',
+                module: require('../../lib/plugins/dust'),
+                files: '**/*.js',
+                base: '/templates',
                 i18n: {
                     contentPath: path.join(__dirname, '../fixtures/locales/US/es')
                 }
@@ -57,6 +81,7 @@ describe('plugins:dust', function () {
         request(app)
             .get('/templates/localized.js')
             .expect(200)
+            .expect(/dust.register\("localized"/)
             .expect(/Hola/)
             .end(done);
     });
@@ -64,7 +89,11 @@ describe('plugins:dust', function () {
 
     it('Errors on invalid inputs', function (done) {
         var app = testutil.createApp({
-            dust: 'templates'
+            dust: {
+                module: require('../../lib/plugins/dust'),
+                files: '**/*.js',
+                base: '/templates'
+            }
         });
 
         request(app)
@@ -76,7 +105,11 @@ describe('plugins:dust', function () {
 
     it('Errors on missing includes', function (done) {
         var app = testutil.createApp({
-            dust: 'templates'
+            dust: {
+                module: require('../../lib/plugins/dust'),
+                files: '**/*.js',
+                base: '/templates'
+            }
         });
 
         request(app)

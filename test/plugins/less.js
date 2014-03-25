@@ -34,7 +34,10 @@ describe('plugins:less', function () {
 
     it('compiles less to css', function (done) {
         var app = testutil.createApp({
-            less: 'css'
+            less: {
+                module: require('../../lib/plugins/less'),
+                files: '/css/**/*.css'
+            }
         });
 
         request(app)
@@ -46,7 +49,10 @@ describe('plugins:less', function () {
 
     it('Errors on invalid inputs', function (done) {
         var app = testutil.createApp({
-            less: 'css'
+            less: {
+                module: require('../../lib/plugins/less'),
+                files: '/css/**/*.css'
+            }
         });
 
         request(app)
@@ -58,7 +64,10 @@ describe('plugins:less', function () {
 
     it('Errors on missing includes', function (done) {
         var app = testutil.createApp({
-            less: 'css'
+            less: {
+                module: require('../../lib/plugins/less'),
+                files: '/css/**/*.css'
+            }
         });
 
         request(app)

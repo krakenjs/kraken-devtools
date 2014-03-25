@@ -45,7 +45,7 @@ module.exports.createApp = function createApp(config) {
 module.exports.cleanUp = function cleanUp() {
     rimraf(destRoot, function (err) {
         if (err) {
-            throw err;
+            // don't throw
         }
     });
 };

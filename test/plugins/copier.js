@@ -15,19 +15,81 @@
  │   See the License for the specific language governing permissions and       │
  │   limitations under the License.                                            │
  \*───────────────────────────────────────────────────────────────────────────*/
+/*global describe, it, beforeEach, afterEach*/
+
 'use strict';
 
 
-var middleware = require('../middleware');
+var request = require('supertest'),
+    testutil = require('../util');
 
 
-module.exports = function (srcRoot, destRoot, options) {
-    var compiler;
+describe('plugins:copier', function () {
 
-    compiler = function (name, data, args, callback) {
-        // noop
-        callback(null, data);
-    };
 
-    return middleware(srcRoot, destRoot, options, compiler, '[a-zA-Z]{2,5}?');
-};
+    afterEach(function () {
+        testutil.cleanUp();
+    });
+
+
+    it('copies static files', function (done) {
+        var app = testutil.createApp({
+            copier: {
+                module: require('../../lib/plugins/copier'),
+                files: '**/*'
+            }
+        });
+
+        request(app)
+            .get('/img/nyan.jpg')
+            .expect(200)
+            .end(done);
+    });
+
+
+    it('copies nested static files', function (done) {
+        var app = testutil.createApp({
+            copier: {
+                module: require('../../lib/plugins/copier'),
+                files: '**/*'
+            }
+        });
+
+        request(app)
+            .get('/img/wow/nyan.jpg')
+            .expect(200)
+            .end(done);
+    });
+
+
+    it('Copies files with no extension', function (done) {
+        var app = testutil.createApp({
+            copier: {
+                module: require('../../lib/plugins/copier'),
+                files: '**/*'
+            }
+        });
+
+        request(app)
+            .get('/img/altfile')
+            .expect(200)
+            .end(done);
+    });
+
+
+    it('Ignores missing files', function (done) {
+        var app = testutil.createApp({
+            copier: {
+                module: require('../../lib/plugins/copier'),
+                files: '**/*'
+            }
+        });
+
+        request(app)
+            .get('/img/batboy.jpg')
+            .expect(404)
+            .end(done);
+    });
+
+
+});

@@ -22,18 +22,22 @@ var noop = require('./lib/noop');
 
 
 
-module.exports = function (src, dest, options) {
+module.exports = function (src, dest, config) {
 
 	return function (req, res, next) {
-		var chain = noop;
+		var chain, handler, name, options;
 
-		Object.keys(options || {}).forEach(function (name) {
+        chain = noop;
+
+		for (name in config) {
+            options = config[name];
+
 		    // Skip if explicitly set to false
-		    if (options[name] === false) {
+		    if (options === false) {
 		        return;
 		    }
 
-		    var handler = require('./lib/plugins/' + name)(src, dest, options[name]);
+		    handler = options.module(src, dest, options);
 
 		    // Create a middleware chain of each handler
 		    chain = (function (prev) {
@@ -47,7 +51,7 @@ module.exports = function (src, dest, options) {
 		            });
 		        };
 		    }(chain));
-		});
+		}
 
 		chain(req, res, next);
 	};
