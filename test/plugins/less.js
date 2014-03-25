@@ -15,40 +15,57 @@
  │   See the License for the specific language governing permissions and       │
  │   limitations under the License.                                            │
  \*───────────────────────────────────────────────────────────────────────────*/
+/*global describe, it, beforeEach, afterEach*/
+
 'use strict';
 
 
-var noop = require('./lib/noop');
+var request = require('supertest'),
+    testutil = require('../util');
 
 
+describe('plugins:less', function () {
 
-module.exports = function (src, dest, options) {
 
-	return function (req, res, next) {
-		var chain = noop;
+    afterEach(function () {
+        testutil.cleanUp();
+    });
 
-		Object.keys(options || {}).forEach(function (name) {
-		    // Skip if explicitly set to false
-		    if (options[name] === false) {
-		        return;
-		    }
 
-		    var handler = require('./lib/plugins/' + name)(src, dest, options[name]);
+    it('compiles less to css', function (done) {
+        var app = testutil.createApp({
+            less: 'css'
+        });
 
-		    // Create a middleware chain of each handler
-		    chain = (function (prev) {
-		        return function devCompiler(req, res, next) {
-		            handler(req, res, function (err) {
-		                if (err) {
-		                    next(err);
-		                    return;
-		                }
-		                prev(req, res, next);
-		            });
-		        };
-		    }(chain));
-		});
+        request(app)
+            .get('/css/less/app.css')
+            .expect(200)
+            .end(done);
+    });
 
-		chain(req, res, next);
-	};
-};
+
+    it('Errors on invalid inputs', function (done) {
+        var app = testutil.createApp({
+            less: 'css'
+        });
+
+        request(app)
+            .get('/css/less/invalid.css')
+            .expect(500)
+            .end(done);
+    });
+
+
+    it('Errors on missing includes', function (done) {
+        var app = testutil.createApp({
+            less: 'css'
+        });
+
+        request(app)
+            .get('/css/less/missing.css')
+            .expect(500)
+            .end(done);
+    });
+
+
+});

@@ -28,7 +28,7 @@ module.exports = function (grunt) {
             }
         },
         mochaTest: {
-            src: ['test/*.js'],
+            src: ['test/**/*.js'],
             options: {
                 timeout: 6000,
                 ignoreLeaks: false,

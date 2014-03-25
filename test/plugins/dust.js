@@ -20,61 +20,67 @@
 'use strict';
 
 
-var request = require('supertest'),
-    testutil = require('./util');
+var path = require('path'),
+    request = require('supertest'),
+    testutil = require('../util');
 
 
-describe('plugins:default', function () {
-
+describe('plugins:dust', function () {
 
     afterEach(function () {
         testutil.cleanUp();
     });
 
 
-    it('copies static files', function (done) {
+    it('compiles dust to js', function (done) {
         var app = testutil.createApp({
-            default: ''
+            dust: 'templates'
         });
 
         request(app)
-            .get('/img/nyan.jpg')
+            .get('/templates/index.js')
             .expect(200)
             .end(done);
     });
 
 
-    it('copies nested static files', function (done) {
+    it('compiles localized dust to js', function (done) {
         var app = testutil.createApp({
-            default: ''
+            dust: {
+                dir: 'templates',
+                i18n: {
+                    contentPath: path.join(__dirname, '../fixtures/locales/US/es')
+                }
+            }
         });
 
         request(app)
-            .get('/img/wow/nyan.jpg')
+            .get('/templates/localized.js')
             .expect(200)
+            .expect(/Hola/)
             .end(done);
     });
 
 
-    it('Ignores files with no extension', function (done) {
+    it('Errors on invalid inputs', function (done) {
         var app = testutil.createApp({
-            default: ''
+            dust: 'templates'
         });
 
         request(app)
-            .get('/img/altfile')
-            .expect(404)
+            .get('/templates/invalid.js')
+            .expect(500)
             .end(done);
     });
 
 
-    it('Ignores missing files', function (done) {
+    it('Errors on missing includes', function (done) {
         var app = testutil.createApp({
-            less: 'css'
+            dust: 'templates'
         });
 
         request(app)
-            .get('/img/batboy.jpg')
+            .get('/templates/missing.js')
             .expect(404)
             .end(done);
     });

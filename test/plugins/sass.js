@@ -20,55 +20,37 @@
 'use strict';
 
 
-var path = require('path'),
-    request = require('supertest'),
-    testutil = require('./util');
+var request = require('supertest'),
+    testutil = require('../util');
 
 
-describe('plugins:dust', function () {
+describe('plugins:sass', function () {
+
 
     afterEach(function () {
         testutil.cleanUp();
     });
 
 
-    it('compiles dust to js', function (done) {
+    it('compiles sass to css', function (done) {
         var app = testutil.createApp({
-            dust: 'templates'
+            sass: 'css'
         });
 
         request(app)
-            .get('/templates/index.js')
+            .get('/css/sass/app.css')
             .expect(200)
-            .end(done);
-    });
-
-
-    it('compiles localized dust to js', function (done) {
-        var app = testutil.createApp({
-            dust: {
-                dir: 'templates',
-                i18n: {
-                    contentPath: path.join(__dirname, 'fixtures/locales/US/es')
-                }
-            }
-        });
-
-        request(app)
-            .get('/templates/localized.js')
-            .expect(200)
-            .expect(/Hola/)
             .end(done);
     });
 
 
     it('Errors on invalid inputs', function (done) {
         var app = testutil.createApp({
-            dust: 'templates'
+            sass: 'css'
         });
 
         request(app)
-            .get('/templates/invalid.js')
+            .get('/css/sass/invalid.css')
             .expect(500)
             .end(done);
     });
@@ -76,12 +58,12 @@ describe('plugins:dust', function () {
 
     it('Errors on missing includes', function (done) {
         var app = testutil.createApp({
-            dust: 'templates'
+            sass: 'css'
         });
 
         request(app)
-            .get('/templates/missing.js')
-            .expect(404)
+            .get('/css/sass/missing.css')
+            .expect(500)
             .end(done);
     });
 

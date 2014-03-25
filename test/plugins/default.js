@@ -15,40 +15,69 @@
  │   See the License for the specific language governing permissions and       │
  │   limitations under the License.                                            │
  \*───────────────────────────────────────────────────────────────────────────*/
+/*global describe, it, beforeEach, afterEach*/
+
 'use strict';
 
 
-var noop = require('./lib/noop');
+var request = require('supertest'),
+    testutil = require('../util');
 
 
+describe('plugins:default', function () {
 
-module.exports = function (src, dest, options) {
 
-	return function (req, res, next) {
-		var chain = noop;
+    afterEach(function () {
+        testutil.cleanUp();
+    });
 
-		Object.keys(options || {}).forEach(function (name) {
-		    // Skip if explicitly set to false
-		    if (options[name] === false) {
-		        return;
-		    }
 
-		    var handler = require('./lib/plugins/' + name)(src, dest, options[name]);
+    it('copies static files', function (done) {
+        var app = testutil.createApp({
+            default: ''
+        });
 
-		    // Create a middleware chain of each handler
-		    chain = (function (prev) {
-		        return function devCompiler(req, res, next) {
-		            handler(req, res, function (err) {
-		                if (err) {
-		                    next(err);
-		                    return;
-		                }
-		                prev(req, res, next);
-		            });
-		        };
-		    }(chain));
-		});
+        request(app)
+            .get('/img/nyan.jpg')
+            .expect(200)
+            .end(done);
+    });
 
-		chain(req, res, next);
-	};
-};
+
+    it('copies nested static files', function (done) {
+        var app = testutil.createApp({
+            default: ''
+        });
+
+        request(app)
+            .get('/img/wow/nyan.jpg')
+            .expect(200)
+            .end(done);
+    });
+
+
+    it('Ignores files with no extension', function (done) {
+        var app = testutil.createApp({
+            default: ''
+        });
+
+        request(app)
+            .get('/img/altfile')
+            .expect(404)
+            .end(done);
+    });
+
+
+    it('Ignores missing files', function (done) {
+        var app = testutil.createApp({
+            less: 'css'
+        });
+
+        request(app)
+            .get('/img/batboy.jpg')
+            .expect(404)
+            .end(done);
+    });
+
+
+});
