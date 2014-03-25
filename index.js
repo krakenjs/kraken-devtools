@@ -38,7 +38,7 @@ module.exports = function (src, dest, config) {
 		        return;
 		    }
 
-            compiler = options.module(options);
+            compiler = require(options.module)(options);
             handler = middleware(src, dest, options, compiler);
 
 		    // Create a middleware chain of each handler

@@ -35,7 +35,7 @@ describe('plugins:dust', function () {
     it('compiles dust to js', function (done) {
         var app = testutil.createApp({
             dust: {
-                module: require('../../lib/plugins/dust'),
+                module: './lib/plugins/dust',
                 files: '**/*.js',
                 base: '/templates'
             }
@@ -52,7 +52,7 @@ describe('plugins:dust', function () {
     it('compiles nested dust to js', function (done) {
         var app = testutil.createApp({
             dust: {
-                module: require('../../lib/plugins/dust'),
+                module: './lib/plugins/dust',
                 files: '**/*.js',
                 base: '/templates'
             }
@@ -69,7 +69,7 @@ describe('plugins:dust', function () {
     it('compiles localized dust to js', function (done) {
         var app = testutil.createApp({
             dust: {
-                module: require('../../lib/plugins/dust'),
+                module: './lib/plugins/dust',
                 files: '**/*.js',
                 base: '/templates',
                 i18n: {
@@ -90,7 +90,7 @@ describe('plugins:dust', function () {
     it('Errors on invalid inputs', function (done) {
         var app = testutil.createApp({
             dust: {
-                module: require('../../lib/plugins/dust'),
+                module: './lib/plugins/dust',
                 files: '**/*.js',
                 base: '/templates'
             }
@@ -106,7 +106,7 @@ describe('plugins:dust', function () {
     it('Errors on missing includes', function (done) {
         var app = testutil.createApp({
             dust: {
-                module: require('../../lib/plugins/dust'),
+                module: './lib/plugins/dust',
                 files: '**/*.js',
                 base: '/templates'
             }

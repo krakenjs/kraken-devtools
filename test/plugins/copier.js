@@ -35,7 +35,7 @@ describe('plugins:copier', function () {
     it('copies static files', function (done) {
         var app = testutil.createApp({
             copier: {
-                module: require('../../lib/plugins/copier'),
+                module: './lib/plugins/copier',
                 files: '**/*'
             }
         });
@@ -50,7 +50,7 @@ describe('plugins:copier', function () {
     it('copies nested static files', function (done) {
         var app = testutil.createApp({
             copier: {
-                module: require('../../lib/plugins/copier'),
+                module: './lib/plugins/copier',
                 files: '**/*'
             }
         });
@@ -65,7 +65,7 @@ describe('plugins:copier', function () {
     it('Copies files with no extension', function (done) {
         var app = testutil.createApp({
             copier: {
-                module: require('../../lib/plugins/copier'),
+                module: './lib/plugins/copier',
                 files: '**/*'
             }
         });
@@ -80,7 +80,7 @@ describe('plugins:copier', function () {
     it('Ignores missing files', function (done) {
         var app = testutil.createApp({
             copier: {
-                module: require('../../lib/plugins/copier'),
+                module: './lib/plugins/copier',
                 files: '**/*'
             }
         });
