@@ -18,14 +18,15 @@
 'use strict';
 
 
-var noop = require('./lib/noop');
+var noop = require('./lib/noop'),
+    middleware = require('./lib/middleware');
 
 
 
 module.exports = function (src, dest, config) {
 
 	return function (req, res, next) {
-		var chain, handler, name, options;
+		var chain, handler, compiler, name, options;
 
         chain = noop;
 
@@ -37,7 +38,8 @@ module.exports = function (src, dest, config) {
 		        return;
 		    }
 
-		    handler = options.module(src, dest, options);
+            compiler = options.module(options);
+            handler = middleware(src, dest, options, compiler);
 
 		    // Create a middleware chain of each handler
 		    chain = (function (prev) {

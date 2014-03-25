@@ -15,7 +15,7 @@
  │   See the License for the specific language governing permissions and       │
  │   limitations under the License.                                            │
  \*───────────────────────────────────────────────────────────────────────────*/
-/*global describe, it, beforeEach, afterEach*/
+/*global describe, it, before, beforeEach, after, afterEach*/
 
 'use strict';
 
@@ -27,7 +27,7 @@ var request = require('supertest'),
 describe('plugins:copier', function () {
 
 
-    afterEach(function () {
+    after(function () {
         testutil.cleanUp();
     });
 
