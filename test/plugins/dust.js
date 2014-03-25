@@ -36,7 +36,7 @@ describe('plugins:dust', function () {
         var app = testutil.createApp({
             dust: {
                 module: './lib/plugins/dust',
-                files: '**/*.js',
+                files: '/templates/**/*.js',
                 base: '/templates'
             }
         });
@@ -53,7 +53,7 @@ describe('plugins:dust', function () {
         var app = testutil.createApp({
             dust: {
                 module: './lib/plugins/dust',
-                files: '**/*.js',
+                files: '/templates/**/*.js',
                 base: '/templates'
             }
         });
@@ -70,7 +70,7 @@ describe('plugins:dust', function () {
         var app = testutil.createApp({
             dust: {
                 module: './lib/plugins/dust',
-                files: '**/*.js',
+                files: '/templates/**/*.js',
                 base: '/templates',
                 i18n: {
                     contentPath: path.join(__dirname, '../fixtures/locales/US/es')
@@ -91,7 +91,7 @@ describe('plugins:dust', function () {
         var app = testutil.createApp({
             dust: {
                 module: './lib/plugins/dust',
-                files: '**/*.js',
+                files: '/templates/**/*.js',
                 base: '/templates'
             }
         });
@@ -107,7 +107,7 @@ describe('plugins:dust', function () {
         var app = testutil.createApp({
             dust: {
                 module: './lib/plugins/dust',
-                files: '**/*.js',
+                files: '/templates/**/*.js',
                 base: '/templates'
             }
         });
