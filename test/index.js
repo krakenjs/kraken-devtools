@@ -24,7 +24,7 @@ var request = require('supertest'),
     testutil = require('./util');
 
 
-describe('plugins:sass', function () {
+describe('devtools', function () {
 
 
     afterEach(function () {
@@ -32,38 +32,24 @@ describe('plugins:sass', function () {
     });
 
 
-    it('compiles sass to css', function (done) {
-        var app = testutil.createApp({
-            sass: 'css'
-        });
+    it('returns a middleware chain using an empty config', function (done) {
+        var app = testutil.createApp();
 
         request(app)
-            .get('/css/sass/app.css')
+            .get('/')
             .expect(200)
             .end(done);
     });
 
 
-    it('Errors on invalid inputs', function (done) {
+    it('returns a middleware chain using a non-empty config', function (done) {
         var app = testutil.createApp({
-            sass: 'css'
+            less: 'css'
         });
 
         request(app)
-            .get('/css/sass/invalid.css')
-            .expect(500)
-            .end(done);
-    });
-
-
-    it('Errors on missing includes', function (done) {
-        var app = testutil.createApp({
-            sass: 'css'
-        });
-
-        request(app)
-            .get('/css/sass/missing.css')
-            .expect(500)
+            .get('/')
+            .expect(200)
             .end(done);
     });
 

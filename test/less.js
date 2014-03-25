@@ -1,39 +1,71 @@
-/*global describe:false, it:false, before:false, after:false, beforeEach:false, afterEach:false*/
+/*───────────────────────────────────────────────────────────────────────────*\
+ │  Copyright (C) 2014 eBay Software Foundation                                │
+ │                                                                             │
+ │hh ,'""`.                                                                    │
+ │  / _  _ \  Licensed under the Apache License, Version 2.0 (the "License");  │
+ │  |(@)(@)|  you may not use this file except in compliance with the License. │
+ │  )  __  (  You may obtain a copy of the License at                          │
+ │ /,'))((`.\                                                                  │
+ │(( ((  )) ))    http://www.apache.org/licenses/LICENSE-2.0                   │
+ │ `\ `)(' /'                                                                  │
+ │                                                                             │
+ │   Unless required by applicable law or agreed to in writing, software       │
+ │   distributed under the License is distributed on an "AS IS" BASIS,         │
+ │   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  │
+ │   See the License for the specific language governing permissions and       │
+ │   limitations under the License.                                            │
+ \*───────────────────────────────────────────────────────────────────────────*/
+/*global describe, it, beforeEach, afterEach*/
+
 'use strict';
 
-var path = require('path'),
-    rimraf = require('rimraf'),
-    devtools = require('../lib/plugins');
+
+var request = require('supertest'),
+    testutil = require('./util');
 
 
-describe('less compiler', function () {
-
-    var srcRoot, staticRoot, paths = require('./config.json').less;
-
-    function resetEnv(next) {
-        rimraf(staticRoot, next);
-    }
+describe('plugins:less', function () {
 
 
-    function factory(config) {
-        return devtools.less(srcRoot, staticRoot, config);
-    }
-
-
-    before(function () {
-        // Ensure the test case assumes it's being run from application root.
-        // Depending on the test harness this may not be the case, so shim.
-        process.chdir(__dirname);
-        paths.srcRoot = srcRoot = path.join(process.cwd(), 'fixtures', 'public');
-        paths.staticRoot = staticRoot = path.join(process.cwd(), 'fixtures', '.build');
+    afterEach(function () {
+        testutil.cleanUp();
     });
 
 
-    after(resetEnv);
+    it('compiles less to css', function (done) {
+        var app = testutil.createApp({
+            less: 'css'
+        });
+
+        request(app)
+            .get('/css/less/app.css')
+            .expect(200)
+            .end(done);
+    });
 
 
-    require('./middleware').handleRequests('css/less', paths, factory);
+    it('Errors on invalid inputs', function (done) {
+        var app = testutil.createApp({
+            less: 'css'
+        });
 
-    require('./hooks').executeHooks('css/less', '/css/less/app.css', factory);
+        request(app)
+            .get('/css/less/invalid.css')
+            .expect(500)
+            .end(done);
+    });
+
+
+    it('Errors on missing includes', function (done) {
+        var app = testutil.createApp({
+            less: 'css'
+        });
+
+        request(app)
+            .get('/css/less/missing.css')
+            .expect(500)
+            .end(done);
+    });
+
 
 });

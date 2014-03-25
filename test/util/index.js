@@ -15,57 +15,37 @@
  │   See the License for the specific language governing permissions and       │
  │   limitations under the License.                                            │
  \*───────────────────────────────────────────────────────────────────────────*/
-/*global describe, it, beforeEach, afterEach*/
-
 'use strict';
 
 
-var request = require('supertest'),
-    testutil = require('./util');
+var path = require('path'),
+    express = require('express'),
+    rimraf = require('rimraf'),
+    devtools = require('../../'),
+    srcRoot = path.join(__dirname, '../fixtures/public'),
+    destRoot = path.join(__dirname, '../tmp');
 
 
-describe('plugins:sass', function () {
+module.exports.createApp = function createApp(config) {
+    config = config || {};
 
+    var app = express();
 
-    afterEach(function () {
-        testutil.cleanUp();
+    app.use(devtools(srcRoot, destRoot, config));
+    app.use(express.static(destRoot));
+
+    app.get('/', function (req, res) {
+        res.send(200);
     });
 
+    return app;
+};
 
-    it('compiles sass to css', function (done) {
-        var app = testutil.createApp({
-            sass: 'css'
-        });
 
-        request(app)
-            .get('/css/sass/app.css')
-            .expect(200)
-            .end(done);
+module.exports.cleanUp = function cleanUp() {
+    rimraf(destRoot, function (err) {
+        if (err) {
+            throw err;
+        }
     });
-
-
-    it('Errors on invalid inputs', function (done) {
-        var app = testutil.createApp({
-            sass: 'css'
-        });
-
-        request(app)
-            .get('/css/sass/invalid.css')
-            .expect(500)
-            .end(done);
-    });
-
-
-    it('Errors on missing includes', function (done) {
-        var app = testutil.createApp({
-            sass: 'css'
-        });
-
-        request(app)
-            .get('/css/sass/missing.css')
-            .expect(500)
-            .end(done);
-    });
-
-
-});
+};

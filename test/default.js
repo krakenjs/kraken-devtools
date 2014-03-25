@@ -1,47 +1,83 @@
-/*global describe:false, it:false, before:false, after:false, beforeEach:false, afterEach:false*/
+/*───────────────────────────────────────────────────────────────────────────*\
+ │  Copyright (C) 2014 eBay Software Foundation                                │
+ │                                                                             │
+ │hh ,'""`.                                                                    │
+ │  / _  _ \  Licensed under the Apache License, Version 2.0 (the "License");  │
+ │  |(@)(@)|  you may not use this file except in compliance with the License. │
+ │  )  __  (  You may obtain a copy of the License at                          │
+ │ /,'))((`.\                                                                  │
+ │(( ((  )) ))    http://www.apache.org/licenses/LICENSE-2.0                   │
+ │ `\ `)(' /'                                                                  │
+ │                                                                             │
+ │   Unless required by applicable law or agreed to in writing, software       │
+ │   distributed under the License is distributed on an "AS IS" BASIS,         │
+ │   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  │
+ │   See the License for the specific language governing permissions and       │
+ │   limitations under the License.                                            │
+ \*───────────────────────────────────────────────────────────────────────────*/
+/*global describe, it, beforeEach, afterEach*/
+
 'use strict';
 
-var path = require('path'),
-    rimraf = require('rimraf'),
-    devtools = require('../lib/plugins');
 
-var hooks = require('./hooks');
+var request = require('supertest'),
+    testutil = require('./util');
 
 
-describe('default copier', function () {
-
-    var srcRoot, staticRoot, paths = {
-        valid: '/img/nyan.jpg',
-        nested: '/img/wow/nyan.jpg',
-        nonexistent: '/img/batboy.png',
-        similar: '/img/altfile'
-    };
+describe('plugins:default', function () {
 
 
-    function resetEnv(next) {
-        rimraf(staticRoot, next);
-    }
-
-
-    function factory(config) {
-        return devtools.default(srcRoot, staticRoot, config);
-    }
-
-
-    before(function () {
-        // Ensure the test case assumes it's being run from application root.
-        // Depending on the test harness this may not be the case, so shim.
-        process.chdir(__dirname);
-        paths.srcRoot = srcRoot = path.join(process.cwd(), 'fixtures', 'public');
-        paths.staticRoot = staticRoot = path.join(process.cwd(), 'fixtures', '.build');
+    afterEach(function () {
+        testutil.cleanUp();
     });
 
 
-    after(resetEnv);
+    it('copies static files', function (done) {
+        var app = testutil.createApp({
+            default: ''
+        });
 
-    require('./middleware').handleRequests('', paths, factory);
+        request(app)
+            .get('/img/nyan.jpg')
+            .expect(200)
+            .end(done);
+    });
 
-    require('./hooks').executeHooks('', '/img/nyan.jpg', factory);
+
+    it('copies nested static files', function (done) {
+        var app = testutil.createApp({
+            default: ''
+        });
+
+        request(app)
+            .get('/img/wow/nyan.jpg')
+            .expect(200)
+            .end(done);
+    });
+
+
+    it('Ignores files with no extension', function (done) {
+        var app = testutil.createApp({
+            default: ''
+        });
+
+        request(app)
+            .get('/img/altfile')
+            .expect(404)
+            .end(done);
+    });
+
+
+    it('Ignores missing files', function (done) {
+        var app = testutil.createApp({
+            less: 'css'
+        });
+
+        request(app)
+            .get('/img/batboy.jpg')
+            .expect(404)
+            .end(done);
+    });
+
 
 });
-
