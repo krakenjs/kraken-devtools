@@ -1,4 +1,3 @@
-/***@@@ BEGIN LICENSE @@@***/
 /*───────────────────────────────────────────────────────────────────────────*\
 │  Copyright (C) 2013 eBay Software Foundation                                │
 │                                                                             │
@@ -16,7 +15,6 @@
 │   See the License for the specific language governing permissions and       │
 │   limitations under the License.                                            │
 \*───────────────────────────────────────────────────────────────────────────*/
-/***@@@ END LICENSE @@@***/
 'use strict';
 
 var fs = require('fs'),
@@ -102,7 +100,7 @@ exports.default = function (srcRoot, destRoot, options) {
         callback(null, data);
     };
 
-    return middleware(srcRoot, destRoot, options, compiler, '[a-zA-Z]{2,5}?');
+    return middleware(srcRoot, destRoot, options, compiler, '[a-zA-Z0-9]{2,5}?');
 };
 
 

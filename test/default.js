@@ -14,7 +14,8 @@ describe('default copier', function () {
         valid: '/img/nyan.jpg',
         nested: '/img/wow/nyan.jpg',
         nonexistent: '/img/batboy.png',
-        similar: '/img/altfile'
+        similar: '/img/altfile',
+        numbered: '/numberedExtension.mp3'
     };
 
 
