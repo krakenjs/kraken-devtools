@@ -32,10 +32,10 @@ app.use(devtools(/* src, dest [, config] */));
 LESS, SASS, and Dust compilers are provided by default in addition to a static file copier. To add additonal compilers pass then to the `config` value, e.g.:
 
 ```json
-    {
-        "less": {
-            "module": "kraken-devtools/plugins/less",
-            "files": "/css/**/*.css"
-        }
+{
+    "less": {
+        "module": "kraken-devtools/plugins/less",
+        "files": "/css/**/*.css"
     }
+}
 ```
