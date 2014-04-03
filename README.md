@@ -2,6 +2,10 @@
 
 Compile-on-the-fly and other development tools for use when building [express](http://expressjs.com/) applications.
 
+[![Build Status](https://travis-ci.org/krakenjs/kraken-devtools.png)](https://travis-ci.org/krakenjs/kraken-devtools)
+[![NPM version](https://badge.fury.io/js/kraken-devtools.png)](http://badge.fury.io/js/kraken-devtools)
+
+
 
 
 ## Middleware compiler
