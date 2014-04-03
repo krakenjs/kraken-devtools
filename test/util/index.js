@@ -15,21 +15,37 @@
  │   See the License for the specific language governing permissions and       │
  │   limitations under the License.                                            │
  \*───────────────────────────────────────────────────────────────────────────*/
-/*global describe, it, beforeEach, afterEach*/
-
 'use strict';
 
 
-var request = require('supertest'),
-    testutil = require('./util');
+var path = require('path'),
+    express = require('express'),
+    rimraf = require('rimraf'),
+    devtools = require('../../'),
+    srcRoot = path.join(__dirname, '../fixtures/public'),
+    destRoot = path.join(__dirname, '../tmp');
 
 
-describe('middleware', function () {
+module.exports.createApp = function createApp(config) {
+    config = config || {};
 
+    var app = express();
 
-    afterEach(function () {
-        testutil.cleanUp();
+    app.use(devtools(srcRoot, destRoot, config));
+    app.use(express.static(destRoot));
+
+    app.get('/', function (req, res) {
+        res.send(200);
     });
 
+    return app;
+};
 
-});
+
+module.exports.cleanUp = function cleanUp() {
+    rimraf(destRoot, function (err) {
+        if (err) {
+            // don't throw
+        }
+    });
+};

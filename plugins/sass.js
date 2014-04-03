@@ -15,21 +15,21 @@
  │   See the License for the specific language governing permissions and       │
  │   limitations under the License.                                            │
  \*───────────────────────────────────────────────────────────────────────────*/
-/*global describe, it, beforeEach, afterEach*/
-
 'use strict';
 
 
-var request = require('supertest'),
-    testutil = require('./util');
+var lib = require('node-sass');
 
 
-describe('middleware', function () {
+module.exports = function (options) {
 
+    return function scss(data, args, callback) {
+        lib.render({
+            data: data,
+            success: callback.bind(null, null),
+            error: callback,
+            includePaths: args.paths
+        });
+    };
 
-    afterEach(function () {
-        testutil.cleanUp();
-    });
-
-
-});
+};

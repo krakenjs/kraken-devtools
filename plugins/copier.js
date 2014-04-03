@@ -15,21 +15,13 @@
  │   See the License for the specific language governing permissions and       │
  │   limitations under the License.                                            │
  \*───────────────────────────────────────────────────────────────────────────*/
-/*global describe, it, beforeEach, afterEach*/
-
 'use strict';
 
 
-var request = require('supertest'),
-    testutil = require('./util');
 
-
-describe('middleware', function () {
-
-
-    afterEach(function () {
-        testutil.cleanUp();
-    });
-
-
-});
+module.exports = function (options) {
+    return function (data, args, callback) {
+        // noop
+        callback(null, data);
+    };
+};

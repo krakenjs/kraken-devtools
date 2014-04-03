@@ -15,21 +15,34 @@
  │   See the License for the specific language governing permissions and       │
  │   limitations under the License.                                            │
  \*───────────────────────────────────────────────────────────────────────────*/
-/*global describe, it, beforeEach, afterEach*/
-
 'use strict';
 
 
-var request = require('supertest'),
-    testutil = require('./util');
+var lib = require('less');
 
 
-describe('middleware', function () {
+module.exports = function (options) {
 
+    return function less(data, args, callback) {
+        var parser = new(lib.Parser)({
+            paths: args.paths, // Specify search paths for @import directives
+            filename: args.context.name, // Specify a filename, for better error messages
+            dumpLineNumbers: "comments" // Enables comment style debugging
+        });
 
-    afterEach(function () {
-        testutil.cleanUp();
-    });
+        try {
+            // Really? REALLY?! It takes an error-handling callback but still can throw errors?
+            parser.parse(data.toString('utf8'), function (err, tree) {
+                if (err) {
+                    callback(err);
+                    return;
+                }
+                callback(null, tree.toCSS());
+            });
 
+        } catch (err) {
+            callback(err);
+        }
+    };
 
-});
+};

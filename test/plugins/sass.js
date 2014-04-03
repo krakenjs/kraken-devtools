@@ -21,14 +21,59 @@
 
 
 var request = require('supertest'),
-    testutil = require('./util');
+    testutil = require('../util');
 
 
-describe('middleware', function () {
+describe('plugins:sass', function () {
 
 
     afterEach(function () {
         testutil.cleanUp();
+    });
+
+
+    it('compiles sass to css', function (done) {
+        var app = testutil.createApp({
+            sass: {
+                module: './plugins/sass',
+                files: '/css/**/*.css'
+            }
+        });
+
+        request(app)
+            .get('/css/sass/app.css')
+            .expect(200)
+            .end(done);
+    });
+
+
+    it('Errors on invalid inputs', function (done) {
+        var app = testutil.createApp({
+            sass: {
+                module: './plugins/sass',
+                files: '/css/**/*.css'
+            }
+        });
+
+        request(app)
+            .get('/css/sass/invalid.css')
+            .expect(500)
+            .end(done);
+    });
+
+
+    it('Errors on missing includes', function (done) {
+        var app = testutil.createApp({
+            sass: {
+                module: './plugins/sass',
+                files: '/css/**/*.css'
+            }
+        });
+
+        request(app)
+            .get('/css/sass/missing.css')
+            .expect(500)
+            .end(done);
     });
 
 

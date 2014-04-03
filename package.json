@@ -1,6 +1,6 @@
 {
   "name": "kraken-devtools",
-  "version": "0.0.3",
+  "version": "1.0.0-alpha.2",
   "description": "A development mode toolkit for kraken",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,8 @@
   ],
   "author": "Erik Toth <ertoth@paypal.com>",
   "contributors": [
-    "Jean-Charles Sisk <jeancharles@paypal.com>"
+    "Jean-Charles Sisk <jeancharles@paypal.com>",
+    "Jeff Harrell <jeharrell@paypal.com>"
   ],
   "licenses": [
     {
@@ -29,19 +30,22 @@
     }
   ],
   "dependencies": {
-    "async": "~0.2.7",
-    "mkdirp": "~0.3.5"
+    "async": "^0.2.7",
+    "mkdirp": "^0.3.5",
+    "concat-stream": "^1.4.4",
+    "rimraf": "^2.2.6",
+    "minimatch": "^0.2.14"
   },
   "devDependencies": {
-    "express": "~3.4.0",
-    "less": "*",
-    "mocha": "~1.9.0",
-    "chai": "~1.5.0",
-    "node-sass": "~0.6.3",
-    "dustjs-linkedin": "~2.0.1",
-    "rimraf": "~2.2.2",
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.7.0",
-    "grunt-mocha-test": "~0.7.0"
+    "express": "^3.4.0",
+    "supertest": "^0.10.0",
+    "mocha": "^1.9.0",
+    "less": "^1.7.0",
+    "grunt": "^0.4.1",
+    "grunt-contrib-jshint": "^0.7.0",
+    "grunt-mocha-test": "^0.7.0",
+    "node-sass": "^0.8.3",
+    "dustjs-linkedin": "^2.3.4",
+    "localizr": "^0.1.0"
   }
 }

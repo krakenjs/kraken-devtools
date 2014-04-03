@@ -15,21 +15,48 @@
  │   See the License for the specific language governing permissions and       │
  │   limitations under the License.                                            │
  \*───────────────────────────────────────────────────────────────────────────*/
-/*global describe, it, beforeEach, afterEach*/
-
 'use strict';
 
 
-var request = require('supertest'),
-    testutil = require('./util');
+var path = require('path'),
+    requireAny = require('../lib/requireany'),
+    i18n = require('./localize'),
+    lib = requireAny('dustjs-linkedin', 'adaro');
 
 
-describe('middleware', function () {
+module.exports = function (options) {
 
+    if (options.i18n) {
+        options.precompile = i18n.preHook;
+        options.postcompile = i18n.postHook;
+    }
 
-    afterEach(function () {
-        testutil.cleanUp();
-    });
+    return function dust(data, args, callback) {
+        var srcFile, propFile;
 
+        try {
+            //if there is i18n, need to first run through localizr
+            if (options.i18n) {
+                srcFile = args.context.filePath;
+                srcFile = srcFile.replace(path.extname(srcFile), '.dust');
+                srcFile = path.join(args.context.srcRoot, srcFile);
+                propFile = path.join(options.i18n.contentPath, args.context.name + '.properties');
 
-});
+                i18n.localize(srcFile, propFile, function(err, data) {
+                    if (err) {
+                        callback(err);
+                        return;
+                    }
+                    callback(null, lib.compile(data, args.context.origName || args.context.name));
+                });
+
+            } else {
+                callback(null, lib.compile(data.toString('utf8'), args.context.name));
+            }
+
+        } catch (err) {
+            callback(err);
+        }
+    };
+
+};

@@ -21,14 +21,59 @@
 
 
 var request = require('supertest'),
-    testutil = require('./util');
+    testutil = require('../util');
 
 
-describe('middleware', function () {
+describe('plugins:less', function () {
 
 
     afterEach(function () {
         testutil.cleanUp();
+    });
+
+
+    it('compiles less to css', function (done) {
+        var app = testutil.createApp({
+            less: {
+                module: './plugins/less',
+                files: '/css/**/*.css'
+            }
+        });
+
+        request(app)
+            .get('/css/less/app.css')
+            .expect(200)
+            .end(done);
+    });
+
+
+    it('Errors on invalid inputs', function (done) {
+        var app = testutil.createApp({
+            less: {
+                module: './plugins/less',
+                files: '/css/**/*.css'
+            }
+        });
+
+        request(app)
+            .get('/css/less/invalid.css')
+            .expect(500)
+            .end(done);
+    });
+
+
+    it('Errors on missing includes', function (done) {
+        var app = testutil.createApp({
+            less: {
+                module: './plugins/less',
+                files: '/css/**/*.css'
+            }
+        });
+
+        request(app)
+            .get('/css/less/missing.css')
+            .expect(500)
+            .end(done);
     });
 
 

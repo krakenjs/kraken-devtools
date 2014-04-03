@@ -24,11 +24,36 @@ var request = require('supertest'),
     testutil = require('./util');
 
 
-describe('middleware', function () {
+describe('devtools', function () {
 
 
     afterEach(function () {
         testutil.cleanUp();
+    });
+
+
+    it('returns a middleware chain using an empty config', function (done) {
+        var app = testutil.createApp();
+
+        request(app)
+            .get('/')
+            .expect(200)
+            .end(done);
+    });
+
+
+    it('returns a middleware chain using a non-empty config', function (done) {
+        var app = testutil.createApp({
+            less: {
+                module: './plugins/less',
+                files: '/css/**/*.css'
+            }
+        });
+
+        request(app)
+            .get('/')
+            .expect(200)
+            .end(done);
     });
 
 
