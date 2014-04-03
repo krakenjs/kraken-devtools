@@ -21,9 +21,9 @@ app.use(devtools(/* src, dest [, config] */));
 
 ### Parameters
 
-`src` - The directory of your source files, e.g. LESS, SASS, Dust
-`dest` - The destination directory for the compiled files
-`config` - Optional. An object of compilers to enable
+`src` - The directory of your source files, e.g. LESS, SASS, Dust  
+`dest` - The destination directory for the compiled files  
+`config` - Optional. An object of compilers to enable  
 
 
 
