@@ -15,7 +15,6 @@ The middleware compiler builds your dependencies as they are requested, allowing
 var app = require('express')(),
     devtools = require('kraken-devtools');
 
-
 app.use(devtools(/* src, dest [, config] */));
 ```
 
