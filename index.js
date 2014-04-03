@@ -19,15 +19,11 @@
 
 
 var noop = require('./lib/noop'),
-    watch = require('./lib/watch'),
     middleware = require('./lib/middleware');
-
 
 
 module.exports = function (src, dest, config) {
 
-    // Watch for changes in src and trigger reloads
-    watch(src, config.livereload);
 
     // Dev compiler middleware
     return function (req, res, next) {

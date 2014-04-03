@@ -34,18 +34,18 @@
     "mkdirp": "^0.3.5",
     "concat-stream": "^1.4.4",
     "rimraf": "^2.2.6",
-    "minimatch": "^0.2.14",
-    "livereload": "^0.3.3"
+    "minimatch": "^0.2.14"
   },
   "devDependencies": {
     "express": "^3.4.0",
     "supertest": "^0.10.0",
     "mocha": "^1.9.0",
     "less": "^1.7.0",
-    "localizr": "git://github.com/totherik/localizr.git",
     "grunt": "^0.4.1",
     "grunt-contrib-jshint": "^0.7.0",
     "grunt-mocha-test": "^0.7.0",
-    "node-sass": "^0.8.3"
+    "node-sass": "^0.8.3",
+    "dustjs-linkedin": "^2.3.4",
+    "localizr": "^0.1.0"
   }
 }
