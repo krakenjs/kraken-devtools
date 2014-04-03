@@ -15,15 +15,14 @@ The middleware compiler builds your dependencies as they are requested, allowing
 var app = require('express')(),
     devtools = require('kraken-devtools');
 
-
 app.use(devtools(/* src, dest [, config] */));
 ```
 
 ### Parameters
 
-`src` - The directory of your source files, e.g. LESS, SASS, Dust
-`dest` - The destination directory for the compiled files
-`config` - Optional. An object of compilers to enable
+`src` - The directory of your source files, e.g. LESS, SASS, Dust  
+`dest` - The destination directory for the compiled files  
+`config` - Optional. An object of compilers to enable  
 
 
 
@@ -32,10 +31,10 @@ app.use(devtools(/* src, dest [, config] */));
 LESS, SASS, and Dust compilers are provided by default in addition to a static file copier. To add additonal compilers pass then to the `config` value, e.g.:
 
 ```json
-    {
-        "less": {
-            "module": "kraken-devtools/plugins/less",
-            "files": "/css/**/*.css"
-        }
+{
+    "less": {
+        "module": "kraken-devtools/plugins/less",
+        "files": "/css/**/*.css"
     }
+}
 ```
