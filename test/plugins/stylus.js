@@ -24,7 +24,7 @@ var request = require('supertest'),
     testutil = require('../util');
 
 
-describe('plugins:less', function () {
+describe('plugins:stylus', function () {
 
 
     afterEach(function () {
@@ -34,14 +34,14 @@ describe('plugins:less', function () {
 
     it('compiles to css', function (done) {
         var app = testutil.createApp({
-            less: {
-                module: './plugins/less',
+            sass: {
+                module: './plugins/stylus',
                 files: '/css/**/*.css'
             }
         });
 
         request(app)
-            .get('/css/less/app.css')
+            .get('/css/stylus/app.css')
             .expect(200)
             .end(done);
     });
@@ -49,14 +49,14 @@ describe('plugins:less', function () {
 
     it('Errors on invalid inputs', function (done) {
         var app = testutil.createApp({
-            less: {
-                module: './plugins/less',
+            sass: {
+                module: './plugins/stylus',
                 files: '/css/**/*.css'
             }
         });
 
         request(app)
-            .get('/css/less/invalid.css')
+            .get('/css/stylus/invalid.css')
             .expect(500)
             .end(done);
     });
@@ -64,14 +64,14 @@ describe('plugins:less', function () {
 
     it('Errors on missing includes', function (done) {
         var app = testutil.createApp({
-            less: {
-                module: './plugins/less',
+            sass: {
+                module: './plugins/stylus',
                 files: '/css/**/*.css'
             }
         });
 
         request(app)
-            .get('/css/less/missing.css')
+            .get('/css/stylus/missing.css')
             .expect(500)
             .end(done);
     });

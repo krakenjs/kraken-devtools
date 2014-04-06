@@ -46,6 +46,7 @@
     "grunt-mocha-test": "^0.7.0",
     "node-sass": "^0.8.3",
     "dustjs-linkedin": "^2.3.4",
-    "localizr": "^0.1.0"
+    "localizr": "^0.1.0",
+    "stylus": "^0.43.0"
   }
 }

@@ -32,7 +32,7 @@ describe('plugins:dustjs', function () {
     });
 
 
-    it('compiles dust to js', function (done) {
+    it('compiles to js', function (done) {
         var app = testutil.createApp({
             dust: {
                 module: './plugins/dustjs',

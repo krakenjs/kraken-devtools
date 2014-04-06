@@ -32,7 +32,7 @@ describe('plugins:sass', function () {
     });
 
 
-    it('compiles sass to css', function (done) {
+    it('compiles to css', function (done) {
         var app = testutil.createApp({
             sass: {
                 module: './plugins/sass',

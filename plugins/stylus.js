@@ -15,66 +15,21 @@
  │   See the License for the specific language governing permissions and       │
  │   limitations under the License.                                            │
  \*───────────────────────────────────────────────────────────────────────────*/
-/*global describe, it, beforeEach, afterEach*/
-
 'use strict';
 
 
-var request = require('supertest'),
-    testutil = require('../util');
+var lib = require('stylus');
 
 
-describe('plugins:less', function () {
+module.exports = function (options) {
 
+    return function styl(data, args, callback) {
+        var config = {
+            filename: args.context.filePath,
+            compress: true
+        };
 
-    afterEach(function () {
-        testutil.cleanUp();
-    });
+        lib.render(data.toString(), config, callback);
+    };
 
-
-    it('compiles to css', function (done) {
-        var app = testutil.createApp({
-            less: {
-                module: './plugins/less',
-                files: '/css/**/*.css'
-            }
-        });
-
-        request(app)
-            .get('/css/less/app.css')
-            .expect(200)
-            .end(done);
-    });
-
-
-    it('Errors on invalid inputs', function (done) {
-        var app = testutil.createApp({
-            less: {
-                module: './plugins/less',
-                files: '/css/**/*.css'
-            }
-        });
-
-        request(app)
-            .get('/css/less/invalid.css')
-            .expect(500)
-            .end(done);
-    });
-
-
-    it('Errors on missing includes', function (done) {
-        var app = testutil.createApp({
-            less: {
-                module: './plugins/less',
-                files: '/css/**/*.css'
-            }
-        });
-
-        request(app)
-            .get('/css/less/missing.css')
-            .expect(500)
-            .end(done);
-    });
-
-
-});
+};

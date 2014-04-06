@@ -43,11 +43,11 @@ app.use(devtools(/* src, dest [, config] */));
 }
 ```
 
-To add additional compilers, create a module with the following format:
+To add additional compilers, create a module with the following format and add it to your configuration:
 
 ```js
 module.exports = function (options) {
-    return function (data, args, callback) {
+    return function fileExtension(data, args, callback) {
         // Compile the data
     };
 };
