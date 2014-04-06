@@ -23,11 +23,13 @@ var lib = require('less');
 
 module.exports = function (options) {
 
-    return function less(data, args, callback) {
+    options.ext = options.ext || 'less';
+
+    return function (data, args, callback) {
         var parser = new(lib.Parser)({
-            paths: args.paths, // Specify search paths for @import directives
-            filename: args.context.name, // Specify a filename, for better error messages
-            dumpLineNumbers: "comments" // Enables comment style debugging
+            paths: args.paths,
+            filename: args.context.name,
+            dumpLineNumbers: 'comments'
         });
 
         try {

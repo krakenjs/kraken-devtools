@@ -23,10 +23,12 @@ var lib = require('stylus');
 
 module.exports = function (options) {
 
+    options.ext = options.ext || 'styl';
+
     return function styl(data, args, callback) {
         var config = {
             filename: args.context.filePath,
-            compress: true
+            paths: args.paths
         };
 
         lib.render(data.toString(), config, callback);

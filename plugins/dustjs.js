@@ -26,19 +26,21 @@ var path = require('path'),
 
 module.exports = function (options) {
 
+    options.ext = options.ext || 'dust';
+
     if (options.i18n) {
         options.precompile = i18n.preHook;
         options.postcompile = i18n.postHook;
     }
 
-    return function dust(data, args, callback) {
+    return function (data, args, callback) {
         var srcFile, propFile;
 
         try {
             //if there is i18n, need to first run through localizr
             if (options.i18n) {
                 srcFile = args.context.filePath;
-                srcFile = srcFile.replace(path.extname(srcFile), '.dust');
+                srcFile = srcFile.replace(path.extname(srcFile), '.' + options.ext);
                 srcFile = path.join(args.context.srcRoot, srcFile);
                 propFile = path.join(options.i18n.contentPath, args.context.name + '.properties');
 

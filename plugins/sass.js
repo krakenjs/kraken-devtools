@@ -23,7 +23,9 @@ var lib = require('node-sass');
 
 module.exports = function (options) {
 
-    return function scss(data, args, callback) {
+    options.ext = options.ext || 'scss';
+
+    return function (data, args, callback) {
         lib.render({
             data: data,
             success: callback.bind(null, null),
