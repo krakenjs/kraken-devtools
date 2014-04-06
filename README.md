@@ -24,15 +24,15 @@ app.use(devtools(/* src, dest [, config] */));
 
 ### Parameters
 
-`src` - The directory of your source files, e.g. LESS, SASS, Dust  
-`dest` - The destination directory for the compiled files  
-`config` - Optional. An object of compilers to enable  
+`src` - The directory of your source files
+`dest` - The destination directory for the compiled files
+`config` - Optional. An object of compilers to enable
 
 
 
-### Compilers
+### Configuration
 
-LESS, SASS, and Dust compilers are provided by default in addition to a static file copier. To add additonal compilers pass then to the `config` value, e.g.:
+`less`, `sass`, `dustjs`, and a static `copier` plugin are available to use. To enable, set the `module` and `files` properties in your `config`, e.g.:
 
 ```json
 {
@@ -41,4 +41,14 @@ LESS, SASS, and Dust compilers are provided by default in addition to a static f
         "files": "/css/**/*.css"
     }
 }
+```
+
+To add additional compilers, create a module with the following format:
+
+```js
+module.exports = function (options) {
+    return function (data, args, callback) {
+        // Compile the data
+    };
+};
 ```
