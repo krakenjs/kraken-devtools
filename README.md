@@ -38,7 +38,8 @@ app.use(devtools(/* src, dest [, config] */));
 {
     "less": {
         "module": "kraken-devtools/plugins/less",
-        "files": "/css/**/*.css"
+        "files": "/css/**/*.css",
+        "ext": "less"
     }
 }
 ```
@@ -47,7 +48,7 @@ To add additional compilers, create a module with the following format and add i
 
 ```js
 module.exports = function (options) {
-    return function fileExtension(data, args, callback) {
+    return function (data, args, callback) {
         // Compile the data
     };
 };
