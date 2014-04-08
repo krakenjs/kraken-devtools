@@ -1,6 +1,6 @@
 {
   "name": "kraken-devtools",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-beta",
   "description": "A development mode toolkit for kraken",
   "main": "index.js",
   "scripts": {
