@@ -31,10 +31,11 @@
   ],
   "dependencies": {
     "async": "^0.2.7",
-    "mkdirp": "^0.3.5",
     "concat-stream": "^1.4.4",
-    "rimraf": "^2.2.6",
-    "minimatch": "^0.2.14"
+    "minimatch": "^0.2.14",
+    "mkdirp": "^0.3.5",
+    "n-deep-merge": "0.0.1",
+    "rimraf": "^2.2.6"
   },
   "devDependencies": {
     "express": "^3.4.0",
