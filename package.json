@@ -31,10 +31,11 @@
   ],
   "dependencies": {
     "async": "^0.2.7",
-    "mkdirp": "^0.3.5",
     "concat-stream": "^1.4.4",
-    "rimraf": "^2.2.6",
-    "minimatch": "^0.2.14"
+    "minimatch": "^0.2.14",
+    "mkdirp": "^0.3.5",
+    "n-deep-merge": "0.0.1",
+    "rimraf": "^2.2.6"
   },
   "devDependencies": {
     "express": "^3.4.0",
@@ -44,7 +45,7 @@
     "grunt": "^0.4.1",
     "grunt-contrib-jshint": "^0.7.0",
     "grunt-mocha-test": "^0.7.0",
-    "node-sass": "^0.8.3",
+    "node-sass": "^0.9.3",
     "dustjs-linkedin": "^2.3.4",
     "localizr": "^0.1.0",
     "stylus": "^0.43.0"
