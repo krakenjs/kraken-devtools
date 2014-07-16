@@ -21,6 +21,7 @@
 
 
 var request = require('supertest'),
+    path = require('path'),
     testutil = require('../util');
 
 
@@ -42,6 +43,21 @@ describe('plugins:sass', function () {
 
         request(app)
             .get('/css/sass/app.css')
+            .expect(200)
+            .end(done);
+    });
+
+    it('passes path configuration to compiler', function (done) {
+        var app = testutil.createApp({
+            sass: {
+                module: './plugins/sass',
+                files: '/css/**/*.css',
+                paths: [path.join(__dirname, '../fixtures/include/sass/')]
+            }
+        });
+
+        request(app)
+            .get('/css/sass/includePath.css')
             .expect(200)
             .end(done);
     });
