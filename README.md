@@ -33,7 +33,7 @@ app.use(devtools(/* src, dest [, config] */));
 
 ### Configuration
 
-`less`, `sass`, `stylus`, `dustjs`, and a static `copier` plugin are available to use. To enable, set the `module` and `files` properties in your `config`, e.g.:
+`less`, `sass`, `stylus`, `dustjs`, `6to5`, and a static `copier` plugin are available to use. To enable, set the `module` and `files` properties in your `config`, e.g.:
 
 ```json
 {

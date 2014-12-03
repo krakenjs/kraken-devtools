@@ -30,6 +30,7 @@
     }
   ],
   "dependencies": {
+    "6to5": "^1.14.6",
     "async": "^0.2.7",
     "concat-stream": "^1.4.4",
     "minimatch": "^0.2.14",
