@@ -32,6 +32,7 @@
   "dependencies": {
     "async": "^0.2.7",
     "concat-stream": "^1.4.4",
+    "debuglog": "^1.0.1",
     "minimatch": "^0.2.14",
     "mkdirp": "^0.3.5",
     "n-deep-merge": "0.0.1",
