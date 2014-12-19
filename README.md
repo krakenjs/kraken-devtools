@@ -1,11 +1,12 @@
-# kraken-devtools
+kraken-devtools
+===============
+
+Lead Maintainer: [Poornima Venkat](https://github.com/pvenkatakrishnan/)  
+
+[![Build Status](https://travis-ci.org/krakenjs/kraken-devtools.svg?branch=master)](https://travis-ci.org/krakenjs/kraken-devtools)  
+[![NPM version](https://badge.fury.io/js/kraken-devtools.png)](http://badge.fury.io/js/kraken-devtools)  
 
 Compile-on-the-fly and other development tools for use when building [express](http://expressjs.com/) applications.
-
-[![Build Status](https://travis-ci.org/krakenjs/kraken-devtools.png)](https://travis-ci.org/krakenjs/kraken-devtools)
-[![NPM version](https://badge.fury.io/js/kraken-devtools.png)](http://badge.fury.io/js/kraken-devtools)
-
-
 
 
 ## Middleware compiler
