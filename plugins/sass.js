@@ -27,9 +27,14 @@ module.exports = function (options) {
 
     return function (data, args, callback) {
         lib.render({
-            data: data,
-            success: callback.bind(null, null),
-            error: callback,
+            data: data.toString(),
+            success: function success(result) {
+                callback(null, result.css || result); // result.css for ^2
+            },
+            error: function error(err) {
+                err.status = 500; // for ^2
+                callback(err);
+            },
             includePaths: args.paths
         });
     };
