@@ -57,3 +57,4 @@ module.exports = function (options) {
 
 ### kraken-devtools-browserify
 Thanks to [iantocristian](http://github.com/iantocristian) we now have [browserify support for kraken-devtools](https://github.com/iantocristian/kraken-devtools-browserify)
+
