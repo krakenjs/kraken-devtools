@@ -76,6 +76,36 @@ describe('plugins:copier', function () {
             .end(done);
     });
 
+    it('Assumes index.html on trailing slash paths', function (done) {
+        var app = testutil.createApp({
+            copier: {
+                module: './plugins/copier',
+                files: '**/*'
+            }
+        });
+
+        request(app)
+            .get('/img/omgpath/')
+            .expect(200)
+            .end(done);
+    });
+
+
+
+    it('Should not barf on a path with a period', function (done) {
+        var app = testutil.createApp({
+            copier: {
+                module: './plugins/copier',
+                files: '**/*'
+            }
+        });
+
+        request(app)
+            .get('/img/omg.path/')
+            .expect(200)
+            .end(done);
+    });
+
 
     it('Ignores missing files', function (done) {
         var app = testutil.createApp({
