@@ -29,10 +29,10 @@ module.exports = function (options) {
         lib.render({
             data: data.toString(),
             success: function success(result) {
-                callback(null, result.css);
+                callback(null, result.css || result); // result.css for ^2
             },
             error: function error(err) {
-                err.status = 500;
+                err.status = 500; // for ^2
                 callback(err);
             },
             includePaths: args.paths
