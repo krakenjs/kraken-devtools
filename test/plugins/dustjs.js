@@ -118,7 +118,7 @@ describe('plugins:dustjs', function () {
             .end(done);
     });
 
-    it('returns a 400 on a non-existent file requested', function (done) {
+    it('returns a 404 on a non-existent file requested', function (done) {
         var app = testutil.createApp({
             dust: {
                 module: './plugins/dustjs',
