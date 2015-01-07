@@ -84,8 +84,12 @@ module.exports.preHook = function pre(config, callback) {
                     callback(err);
                     return;
                 }
-                fs.createReadStream(srcFile).pipe(fs.createWriteStream(destFile));
-                callback(null, config);
+                fs.createReadStream(srcFile)
+                    .pipe(fs.createWriteStream(destFile)
+                        .on('finish', function() {
+                            callback(null, config);
+                        })
+                        .on('error', callback));
 
             });
         }
