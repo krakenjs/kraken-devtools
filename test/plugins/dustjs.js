@@ -118,5 +118,23 @@ describe('plugins:dustjs', function () {
             .end(done);
     });
 
+    it('returns a 400 on a non-existent file requested', function (done) {
+        var app = testutil.createApp({
+            dust: {
+                module: './plugins/dustjs',
+                files: '/templates/**/*.js',
+                base: '/templates',
+                i18n: {
+                    contentPath: path.join(__dirname, '../fixtures/locales/US/es')
+                }
+            }
+        });
+
+        request(app)
+            .get('/templates/idontexist/index.js')
+            .expect(404)
+            .end(done);
+    });
+
 
 });
