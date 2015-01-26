@@ -35,11 +35,11 @@ module.exports.localize = function localize(srcFile, propFile, cb) {
     var out = concat({ encoding: 'string'}, function (data) {
         cb(null, data);
     });
-    try {
-        localizr.createReadStream(opt).pipe(out);
-    } catch (err) {
-        cb(err);
-    }
+
+    var readStream = localizr.createReadStream(opt);
+    var writeStream = readStream.pipe(out);
+    readStream.on('error', cb);
+    writeStream.on('error', cb);
 };
 
 
