@@ -1,7 +1,7 @@
 kraken-devtools
 ===============
 
-Lead Maintainer: [Poornima Venkat](https://github.com/pvenkatakrishnan/)  
+Lead Maintainer: [Matt Edelmann](https://github.com/grawk)  
 
 [![Build Status](https://travis-ci.org/krakenjs/kraken-devtools.svg?branch=master)](https://travis-ci.org/krakenjs/kraken-devtools)  
 [![NPM version](https://badge.fury.io/js/kraken-devtools.png)](http://badge.fury.io/js/kraken-devtools)  
