@@ -60,7 +60,21 @@ describe('plugins:dustjs', function () {
 
         request(app)
             .get('/templates/inc/partial.js')
-            .expect(/dust.register\("inc\/partial"/)
+            .expect(function (res) {
+                /*jshint evil:true*/
+                var template = {};
+                var dust = {
+                    register: function(templ) {
+                        template[templ] = true;
+                    }
+                };
+
+                eval(res.text);
+
+                if (!template['inc/partial']) {
+                    throw new Error("template 'inc/partial' failed to register");
+                }
+            })
             .expect(200)
             .end(done);
     });
