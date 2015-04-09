@@ -91,8 +91,7 @@ describe('plugins:copier', function () {
     });
 
 
-
-    it('Should not barf on a path with a period', function (done) {
+    it('Should not barf on a paths with special characters', function (done) {
         var app = testutil.createApp({
             copier: {
                 module: './plugins/copier',
@@ -100,12 +99,24 @@ describe('plugins:copier', function () {
             }
         });
 
-        request(app)
-            .get('/img/omg.path/')
-            .expect(200)
-            .end(done);
-    });
+        var paths = ['/img/omg.path/', '/img/omg.path/omg.file.png',
+                     '/img/omg+path/', '/img/omg+path/omg+file.png'];
 
+        req();
+
+        function req() {
+            var path;
+            if (path = paths.shift()) {
+                request(app)
+                  .get(path)
+                  .expect(200)
+                  .end(req);
+            } else {
+                done.apply(null, arguments);
+            }
+        }
+    });
+    
 
     it('Ignores missing files', function (done) {
         var app = testutil.createApp({
