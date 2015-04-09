@@ -48,7 +48,7 @@
     "less": "^1.7.0",
     "localizr": "^0.1.0",
     "mocha": "^1.9.0",
-    "node-sass": "^1.0.0",
+    "node-sass": "^2.1.1",
     "stylus": "^0.43.0",
     "supertest": "^0.10.0"
   }
