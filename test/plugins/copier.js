@@ -100,7 +100,8 @@ describe('plugins:copier', function () {
         });
 
         var paths = ['/img/omg.path/', '/img/omg.path/omg.file.png',
-                     '/img/omg+path/', '/img/omg+path/omg+file.png'];
+                     '/img/omg+path/', '/img/omg+path/omg+file.png',
+                     '/img/omg.file[aeiou]'];
 
         req();
 
