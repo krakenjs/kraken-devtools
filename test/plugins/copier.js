@@ -92,4 +92,19 @@ describe('plugins:copier', function () {
     });
 
 
+    it('should not crash', function (done) {
+        var app = testutil.createApp({
+            copier: {
+                module: './plugins/copier',
+                files: '**/*'
+            }
+        });
+
+        request(app)
+            .get('/crash.me+again/')
+            .expect(404)
+            .end(done);
+    });
+
+
 });
