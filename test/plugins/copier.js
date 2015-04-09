@@ -101,7 +101,7 @@ describe('plugins:copier', function () {
         });
 
         request(app)
-            .get('/crash.me/')
+            .get('/crash.me+again/')
             .expect(404)
             .end(done);
     });
