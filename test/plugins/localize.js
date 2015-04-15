@@ -3,6 +3,7 @@
 "use strict";
 
 var localize = require("../../plugins/localize"),
+	path = require('path'),
 	assert = require("assert");
 
 describe("plugins:localize", function () {
@@ -11,4 +12,57 @@ describe("plugins:localize", function () {
 			assert.ok(err);
 		});
 	});
+
+	it(".preHook() regex should process locale for alpha country-codes like HK/zh (HK-zh)", function(done) {
+		// config stub
+		var configStub = {
+			srcRoot: path.resolve('test/fixtures/public'),
+			destRoot: path.resolve('test/tmp'),
+			filePath: 'templates/HK/zh/localized.js',
+			name: 'HK/zh/localized',
+			ext: 'dust'
+		};
+
+		var cb = function(err, obj){
+			assert.equal(err, null);
+
+			var country = obj.locality.country;
+			var language = obj.locality.language;
+
+			assert.equal(country, 'HK');
+			assert.equal(language, 'zh');
+
+			done();
+		};
+
+
+		localize.preHook(configStub, cb);
+	});
+
+	it(".preHook() regex should process locale for alphanumeric country-codes like C2/zh (C2-zh)", function(done) {
+		// config stub
+		var configStub = {
+			srcRoot: path.resolve('test/fixtures/public'),
+			destRoot: path.resolve('test/tmp'),
+			filePath: '/templates/C2/zh/localized.js',
+			name: 'C2/zh/localized',
+			ext: 'dust'
+		};
+
+		var cb = function(err, obj){
+			assert.equal(err, null);
+
+			var country = obj.locality.country;
+			var language = obj.locality.language;
+
+			assert.equal(country, 'C2');
+			assert.equal(language, 'zh');
+
+			done();
+		};
+
+
+		localize.preHook(configStub, cb);
+	});
+
 });

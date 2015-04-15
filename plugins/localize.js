@@ -45,7 +45,7 @@ module.exports.localize = function localize(srcFile, propFile, cb) {
 
 module.exports.preHook = function pre(config, callback) {
 
-    var locale = config.name.match(/(?:([A-Za-z]{2})\/([A-Za-z]{2})\/)?(.*)/),
+    var locale = config.name.match(/(?:([A-Za-z0-9]{2})\/([A-Za-z]{2})\/)?(.*)/),
         copyFile,
         dir,
         srcFile,
