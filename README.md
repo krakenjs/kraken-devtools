@@ -12,7 +12,7 @@ Compile-on-the-fly and other development tools for use when building [express](h
 
 Without a great system for supporting optional peer dependencies, here are some minimum versions for using plugins shipped with `kraken-devtools`:
 
-1. `node-sass@^1.0.0`
+1. `node-sass@^3.0.0`
 
 ## Middleware compiler
 
