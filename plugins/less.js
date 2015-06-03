@@ -18,33 +18,34 @@
 'use strict';
 
 
-var lib = require('less');
+var less = require('less');
 
 
 module.exports = function (options) {
 
     options.ext = options.ext || 'less';
+    options.dumpLineNumbers = 'comments';
 
     return function (data, args, callback) {
-        var parser = new(lib.Parser)({
-            paths: args.paths,
-            filename: args.context.name,
-            dumpLineNumbers: 'comments'
-        });
+
+        var css = data.toString('utf8');
+
+        options.paths = args.paths;
+        options.filename = args.context.name;
 
         try {
             // Really? REALLY?! It takes an error-handling callback but still can throw errors?
-            parser.parse(data.toString('utf8'), function (err, tree) {
+            less.render(css, options, function (err, output) {
                 if (err) {
                     callback(err);
                     return;
                 }
-                callback(null, tree.toCSS());
+                callback(null, output.css);
             });
-
         } catch (err) {
             callback(err);
         }
+
     };
 
 };
