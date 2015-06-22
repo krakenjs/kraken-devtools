@@ -31,7 +31,9 @@ module.exports = function (options) {
             paths: args.paths
         };
         if(args.use) {
-            config.use = args.use.map(require);
+            config.use = args.use.map(function (pluginName) {
+                return require(pluginName)();
+            });
         }
 
         lib.render(data.toString(), config, callback);
