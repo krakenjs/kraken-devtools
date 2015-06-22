@@ -30,6 +30,9 @@ module.exports = function (options) {
             filename: args.context.filePath,
             paths: args.paths
         };
+        if(args.use) {
+            config.use = args.use.map(require);
+        }
 
         lib.render(data.toString(), config, callback);
     };
