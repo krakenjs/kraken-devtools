@@ -47,6 +47,38 @@ describe('plugins:stylus', function () {
     });
 
 
+    it('handle valid plugins', function (done) {
+        var app = testutil.createApp({
+            sass: {
+                module: './plugins/stylus',
+                files: '/css/**/*.css',
+                use: ['nib', 'jeet']
+            }
+        });
+
+        request(app)
+            .get('/css/stylus/app.css')
+            .expect(200)
+            .end(done);
+    });
+
+
+    it('handle invalid plugins', function (done) {
+        var app = testutil.createApp({
+            sass: {
+                module: './plugins/stylus',
+                files: '/css/**/*.css',
+                use: ['does-not-exists', 'missing-foo-bar']
+            }
+        });
+
+        request(app)
+            .get('/css/stylus/app.css')
+            .expect(500)
+            .end(done);
+    });
+
+
     it('Errors on invalid inputs', function (done) {
         var app = testutil.createApp({
             sass: {
