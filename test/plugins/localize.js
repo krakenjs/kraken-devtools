@@ -65,4 +65,30 @@ describe("plugins:localize", function () {
 		localize.preHook(configStub, cb);
 	});
 
+	it(".preHook() regex should process locale for long country-groups like GROUP/es (es-GROUP)", function(done) {
+		// config stub
+		var configStub = {
+			srcRoot: path.resolve('test/fixtures/public'),
+			destRoot: path.resolve('test/tmp'),
+			filePath: '/templates/GROUP/es/localized.js',
+			name: 'GROUP/es/localized',
+			ext: 'dust'
+		};
+
+		var cb = function(err, obj){
+			assert.equal(err, null);
+
+			var country = obj.locality.country;
+			var language = obj.locality.language;
+
+			assert.equal(country, 'GROUP');
+			assert.equal(language, 'es');
+
+			done();
+		};
+
+
+		localize.preHook(configStub, cb);
+	});
+
 });
