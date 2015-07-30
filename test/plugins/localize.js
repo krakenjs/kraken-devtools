@@ -39,7 +39,7 @@ describe("plugins:localize", function () {
 		localize.preHook(configStub, cb);
 	});
 
-	it(".preHook() regex should process locale for alphanumeric country-codes like C2/zh (C2-zh)", function(done) {
+	it(".preHook() regex should process locale for alphanumeric country-codes like C2/zh (zh-C2)", function(done) {
 		// config stub
 		var configStub = {
 			srcRoot: path.resolve('test/fixtures/public'),
