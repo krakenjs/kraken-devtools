@@ -23,12 +23,7 @@
     "Jean-Charles Sisk <jeancharles@paypal.com>",
     "Jeff Harrell <jeharrell@paypal.com>"
   ],
-  "licenses": [
-    {
-      "type": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    }
-  ],
+  "license": "Apache-2.0",
   "dependencies": {
     "async": "^0.2.7",
     "concat-stream": "^1.4.4",
