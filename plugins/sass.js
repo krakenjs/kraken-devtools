@@ -36,6 +36,13 @@ module.exports = function (options) {
                 callback(err);
             },
             includePaths: args.paths
+        }, function(err, result) {
+            if(err) {
+                err.status = 500;
+                callback(err)
+            } else {
+                callback(null, result.css || result);
+            }
         });
     };
 
