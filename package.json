@@ -25,26 +25,26 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "async": "^0.2.7",
+    "async": "^1.5.2",
     "concat-stream": "^1.4.4",
     "debuglog": "^1.0.1",
-    "minimatch": "^0.2.14",
-    "mkdirp": "^0.3.5",
+    "minimatch": "^3.0.2",
+    "mkdirp": "^0.5.1",
     "n-deep-merge": "0.0.1",
     "rimraf": "^2.2.6"
   },
   "devDependencies": {
     "dustjs-linkedin": "^2.3.4",
-    "express": "^3.4.0",
-    "grunt": "^0.4.1",
-    "grunt-cli": "^0.1.13",
-    "grunt-contrib-jshint": "^0.7.0",
-    "grunt-mocha-test": "^0.7.0",
-    "less": "^1.7.0",
-    "localizr": "^0.1.0",
-    "mocha": "^1.9.0",
-    "node-sass": "^2.1.1",
-    "stylus": "^0.43.0",
-    "supertest": "^0.10.0"
+    "express": "^4.14.0",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-mocha-test": "^0.12.7",
+    "less": "^2.7.1",
+    "localizr": "^1.1.0",
+    "mocha": "^2.5.3",
+    "node-sass": "^3.8.0",
+    "stylus": "^0.54.5",
+    "supertest": "^1.2.0"
   }
 }

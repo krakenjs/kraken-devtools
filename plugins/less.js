@@ -34,7 +34,7 @@ module.exports = function (options) {
 
         try {
             // Really? REALLY?! It takes an error-handling callback but still can throw errors?
-            parser.parse(data.toString('utf8'), function (err, tree) {
+            lib.render(data.toString('utf8'), function (err, tree) {
                 if (err) {
                     callback(err);
                     return;
