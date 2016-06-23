@@ -26,21 +26,20 @@ module.exports = function (options) {
     options.ext = options.ext || 'less';
 
     return function (data, args, callback) {
-        var parser = new(lib.Parser)({
+        var options = {
             paths: args.paths,
             filename: args.context.name,
             dumpLineNumbers: 'comments'
-        });
+        };
 
         try {
             // Really? REALLY?! It takes an error-handling callback but still can throw errors?
-            parser.parse(data.toString('utf8'), function (err, tree) {
-                if (err) {
-                    callback(err);
-                    return;
-                }
-                callback(null, tree.toCSS());
-            });
+            lib.render(data.toString('utf8'), options)
+              .then(function(tree) {
+                callback(null, tree.css);
+              }, function(err) {
+                callback(err);
+              });
 
         } catch (err) {
             callback(err);

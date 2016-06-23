@@ -35,7 +35,7 @@ module.exports.createApp = function createApp(config) {
     app.use(express.static(destRoot));
 
     app.get('/', function (req, res) {
-        res.send(200);
+        res.sendStatus(200);
     });
 
     return app;
