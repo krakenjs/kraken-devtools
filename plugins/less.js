@@ -28,6 +28,7 @@ module.exports = function (options) {
     return function (data, args, callback) {
         var parser = new(lib.Parser)({
             paths: args.paths,
+            rootpath: args.rootpath,
             filename: args.context.name,
             dumpLineNumbers: 'comments'
         });
