@@ -35,17 +35,17 @@ module.exports.localize = function localize(srcFile, propFile, cb) {
     var out = concat({ encoding: 'string'}, function (data) {
         cb(null, data);
     });
-    try {
-        localizr.createReadStream(opt).pipe(out);
-    } catch (err) {
-        cb(err);
-    }
+
+    var readStream = localizr.createReadStream(opt);
+    var writeStream = readStream.pipe(out);
+    readStream.on('error', cb);
+    writeStream.on('error', cb);
 };
 
 
 module.exports.preHook = function pre(config, callback) {
 
-    var locale = config.name.match(/(?:([A-Za-z]{2})\/([A-Za-z]{2})\/)?(.*)/),
+    var locale = config.name.match(/(?:([A-Za-z0-9_]+)\/([A-Za-z]{2})\/)?(.*)/),
         copyFile,
         dir,
         srcFile,
@@ -70,15 +70,31 @@ module.exports.preHook = function pre(config, callback) {
     config.srcRoot = path.join(process.cwd() , 'tmp');
     destFile = path.join (config.srcRoot, 'templates', config.name + '.dust');
 
-    mkdirp(path.dirname(destFile), function(err) {
-        if (err) {
+    //check if the srcFile exists
+    fs.exists(srcFile, function (exists) {
+        var err;
+        if (!exists) {
+            err = new Error('File not found:', srcFile);
+            err.code = 'ENOENT';
             callback(err);
             return;
-        }
-        fs.createReadStream(srcFile).pipe(fs.createWriteStream(destFile));
-        callback(null, config);
+        } else {
+            mkdirp(path.dirname(destFile), function(err) {
+                if (err) {
+                    callback(err);
+                    return;
+                }
+                fs.createReadStream(srcFile)
+                    .pipe(fs.createWriteStream(destFile)
+                        .on('finish', function() {
+                            callback(null, config);
+                        })
+                        .on('error', callback));
 
+            });
+        }
     });
+
 };
 
 

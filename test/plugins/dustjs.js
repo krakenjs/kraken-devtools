@@ -60,7 +60,21 @@ describe('plugins:dustjs', function () {
 
         request(app)
             .get('/templates/inc/partial.js')
-            .expect(/dust.register\("inc\/partial"/)
+            .expect(function (res) {
+                /*jshint evil:true*/
+                var template = {};
+                var dust = {
+                    register: function(templ) {
+                        template[templ] = true;
+                    }
+                };
+
+                eval(res.text);
+
+                if (!template['inc/partial']) {
+                    throw new Error("template 'inc/partial' failed to register");
+                }
+            })
             .expect(200)
             .end(done);
     });
@@ -114,6 +128,24 @@ describe('plugins:dustjs', function () {
 
         request(app)
             .get('/templates/missing.js')
+            .expect(404)
+            .end(done);
+    });
+
+    it('returns a 404 on a non-existent file requested', function (done) {
+        var app = testutil.createApp({
+            dust: {
+                module: './plugins/dustjs',
+                files: '/templates/**/*.js',
+                base: '/templates',
+                i18n: {
+                    contentPath: path.join(__dirname, '../fixtures/locales/US/es')
+                }
+            }
+        });
+
+        request(app)
+            .get('/templates/idontexist/index.js')
             .expect(404)
             .end(done);
     });

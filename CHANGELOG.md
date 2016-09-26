@@ -1,3 +1,13 @@
+##### v1.3.0
+
+- Allow for locales with more than two letter country codes (e.g. `en-EMEA`) in order to group several countries together
+
+##### v1.2.3 - 23062015
+
+**Bugs**
+- https://github.com/krakenjs/kraken-devtools/issues/25
+
+
 ##### v0.0.3 - 21092013
 
 **Bugs**
