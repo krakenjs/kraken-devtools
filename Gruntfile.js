@@ -22,13 +22,13 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         jshint: {
-            files: ['Gruntfile.js', 'index.js', 'lib/**/*.js', 'test/**/*.js'],
+            files: ['Gruntfile.js', 'index.js', 'lib/**/*.js', 'test/**/*.js', '!test/fixtures/public/js/es6*.js'],
             options: {
                 jshintrc: '.jshintrc'
             }
         },
         mochaTest: {
-            src: ['test/**/*.js'],
+            src: ['test/**/*.js', '!test/**/es6*.js'],
             options: {
                 timeout: 6000,
                 ignoreLeaks: false,
