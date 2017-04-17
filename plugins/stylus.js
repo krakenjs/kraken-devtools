@@ -30,6 +30,11 @@ module.exports = function (options) {
             filename: args.context.filePath,
             paths: args.paths
         };
+        if(args.use) {
+            config.use = args.use.map(function (pluginName) {
+                return require(pluginName)();
+            });
+        }
 
         lib.render(data.toString(), config, callback);
     };
