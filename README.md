@@ -1,7 +1,4 @@
-kraken-devtools
-===============
-
-Lead Maintainer: [Matt Edelmann](https://github.com/grawk)  
+# kraken-devtools
 
 [![Build Status](https://travis-ci.org/krakenjs/kraken-devtools.svg?branch=master)](https://travis-ci.org/krakenjs/kraken-devtools)  
 [![NPM version](https://badge.fury.io/js/kraken-devtools.png)](http://badge.fury.io/js/kraken-devtools)  
@@ -62,4 +59,3 @@ module.exports = function (options) {
 
 ### kraken-devtools-browserify
 Thanks to [iantocristian](http://github.com/iantocristian) we now have [browserify support for kraken-devtools](https://github.com/iantocristian/kraken-devtools-browserify)
-
