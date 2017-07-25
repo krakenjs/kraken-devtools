@@ -1,3 +1,7 @@
+##### v1.4.0
+
+- Allow underscore character for grouped country identifiers
+
 ##### v1.3.0
 
 - Allow for locales with more than two letter country codes (e.g. `en-EMEA`) in order to group several countries together
